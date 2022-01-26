@@ -1,15 +1,30 @@
-import ClassName from 'models/classname';
-
 import Image from 'components/Image';
+import styled from 'styled-components';
 
-import styles from './FeaturedImage.module.scss';
+const Featured = styled(Image)({
+  margin: '0 0 2em',
 
-const FeaturedImage = ({ className, ...rest }) => {
-  const featuredImageClassName = new ClassName(styles.featuredImage);
+  div: {
+    position: 'relative',
+    width: '100%',
+    height: 0,
+    paddingTop: 'percentage(math.div(400, 960))',
+  },
 
-  featuredImageClassName.addIf(className, className);
+  img: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    border: 0,
+    padding: 0,
+    margin: 'auto',
+  },
+});
 
-  return <Image className={featuredImageClassName} {...rest} />;
+const FeaturedImage = ({ ...rest }) => {
+  return <Featured {...rest} />;
 };
 
 export default FeaturedImage;

@@ -1,17 +1,26 @@
-import ClassName from 'models/classname';
+import styled from 'styled-components';
 
-import styles from './Title.module.scss';
+const TitleWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  width: '100%',
 
-const Title = ({ className, title, thumbnail }) => {
-  const titleClassName = new ClassName(styles.title);
+  img: {
+    width: '1.4em',
+    height: 'auto',
+    borderRadius: '50%',
+    marginBottom: '0.3em',
+  },
+});
 
-  titleClassName.addIf(className, className);
-
+const Title = ({ title, thumbnail }) => {
   return (
-    <div className={titleClassName.toString()}>
+    <TitleWrapper>
       {thumbnail && <img src={thumbnail.url} alt="" aria-hidden="true" />}
       <span>{title}</span>
-    </div>
+    </TitleWrapper>
   );
 };
 

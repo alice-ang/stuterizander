@@ -1,11 +1,11 @@
 {
   "name": "next-wordpress-starter",
-  "homepage": "https://next-wordpress-starter.spacejelly.dev",
+  "homepage": "https://stuteri-zander.netlify.app/",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Colby Fayock <hello@colbyfayock.com>",
   "scripts": {
-    "build": "next build",
+    "build": "next build && next export",
     "wpe-build": "npm run build",
     "dev": "next dev",
     "export": "next export",
@@ -40,9 +40,11 @@
     "react-icons": "^4.3.1",
     "rss": "^1.2.2",
     "sass": "^1.45.1",
-    "style.css": "^1.0.0"
+    "style.css": "^1.0.0",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.2",
     "eslint": "7.32.0",
     "eslint-config-next": "^12.0.8",
     "eslint-config-prettier": "^8.3.0",

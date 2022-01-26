@@ -1,17 +1,20 @@
-import styles from './Button.module.scss';
+import styled from 'styled-components';
 
-const Button = ({ children, className, ...rest }) => {
-  let buttonClassName = styles.button;
+const StyledButton = styled.button({
+  color: 'white',
+  fontFamily: 'inherit',
+  fontSize: '1.3em',
+  fontWeight: 700,
+  backgroundColor: 'tomto',
+  padding: ' 0.8em 1.4em',
+  borderRadius: 5,
+  border: 0,
+  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.4)',
+  cursor: 'pointer',
+});
 
-  if (className) {
-    buttonClassName = `${buttonClassName} ${className}`;
-  }
-
-  return (
-    <button {...rest} className={buttonClassName}>
-      {children}
-    </button>
-  );
+const Button = ({ children, ...rest }) => {
+  return <StyledButton {...rest}>{children}</StyledButton>;
 };
 
 export default Button;

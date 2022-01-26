@@ -1,16 +1,40 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 
-import ClassName from 'models/classname';
+const Crumbs = styled.ul({
+  display: 'flex',
+  listStyle: 'none',
+  paddingLeft: 0,
+  margin: '0 0 2em',
 
-import styles from './Breadcrumbs.module.scss';
+  li: {
+    marginRight: '0.5em',
 
-const Breadcrumbs = ({ className, breadcrumbs }) => {
-  const breadcrumbsClassName = new ClassName(styles.breadcrumbs);
+    '&:after': {
+      content: '/',
+      marginLeft: '0.5em',
+    },
 
-  breadcrumbsClassName.addIf(className, className);
+    '&:last-child': {
+      '&:after': {
+        content: 'none',
+      },
+    },
+  },
+  a: {
+    color: 'grey',
+    textDecoration: 'none',
 
+    '&:hover': {
+      color: 'tomato',
+      textDecoration: 'underline',
+    },
+  },
+});
+
+const Breadcrumbs = ({ breadcrumbs }) => {
   return (
-    <ul className={breadcrumbsClassName.toString()}>
+    <Crumbs>
       {breadcrumbs.map(({ id, title, uri }) => {
         return (
           <li key={id}>
@@ -23,7 +47,7 @@ const Breadcrumbs = ({ className, breadcrumbs }) => {
           </li>
         );
       })}
-    </ul>
+    </Crumbs>
   );
 };
 

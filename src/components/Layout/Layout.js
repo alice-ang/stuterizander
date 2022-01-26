@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Helmet } from 'react-helmet';
-import styles from './Layout.module.scss';
+import styled from 'styled-components';
 
 import useSite from 'hooks/use-site';
 import { helmetSettingsFromMetadata } from 'lib/site';
@@ -8,6 +8,12 @@ import { helmetSettingsFromMetadata } from 'lib/site';
 import Nav from 'components/Nav';
 import Main from 'components/Main';
 import Footer from 'components/Footer';
+
+const LayoutWrapper = styled.div({
+  display: 'grid',
+  gridTemplateRows: 'auto 1fr auto',
+  minHeight: '100vh',
+});
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -61,7 +67,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className={styles.layoutContainer}>
+    <LayoutWrapper>
       <Helmet {...helmetSettings} />
 
       <Nav />
@@ -69,7 +75,7 @@ const Layout = ({ children }) => {
       <Main>{children}</Main>
 
       <Footer />
-    </div>
+    </LayoutWrapper>
   );
 };
 

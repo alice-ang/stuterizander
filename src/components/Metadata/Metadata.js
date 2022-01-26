@@ -3,26 +3,93 @@ import Link from 'next/link';
 import { categoryPathBySlug } from 'lib/categories';
 import { authorPathByName } from 'lib/users';
 import { formatDate } from 'lib/datetime';
-import ClassName from 'models/classname';
-
+import styled from 'styled-components';
 import { FaMapPin } from 'react-icons/fa';
-import styles from './Metadata.module.scss';
 
 const DEFAULT_METADATA_OPTIONS = {
   compactCategories: true,
 };
 
-const Metadata = ({ className, author, date, categories, options = DEFAULT_METADATA_OPTIONS, isSticky = false }) => {
-  const metadataClassName = new ClassName(styles.metadata);
+const Meta = styled.ul({
+  display: 'flex',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  color: 'grey',
+  listStyle: 'none',
+  padding: 0,
+  margin: '0 -0.8em',
 
-  metadataClassName.addIf(className, className);
+  ul: {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+  },
 
+  '& > li': {
+    margin: '0.8em',
+  },
+
+  p: {
+    margin: 0,
+  },
+
+  a: {
+    color: 'inherit',
+    textDecoration: 'none',
+
+    '&:hover': {
+      color: 'tomato',
+      textDecoration: 'underline',
+    },
+  },
+});
+
+const Author = styled.li({
+  a: {
+    marginLeft: '0.2em',
+  },
+
+  address: {
+    display: 'flex',
+    alignItems: 'center',
+    fontStyle: 'normal',
+  },
+
+  img: {
+    width: '1.4em',
+    height: 'auto',
+    borderRadius: ' 50%',
+    marginRight: '0.5em',
+  },
+});
+
+const Categories = styled.li({
+  display: 'inline-block',
+
+  '&:after': {
+    content: ', ',
+    marginRight: '0.4em',
+  },
+
+  '&:last-child': {
+    '&:after': {
+      content: 'none',
+    },
+  },
+});
+
+const Sticky = styled.li({
+  fontSize: '1.15em',
+  color: 'grey',
+});
+
+const Metadata = ({ author, date, categories, options = DEFAULT_METADATA_OPTIONS, isSticky = false }) => {
   const { compactCategories } = options;
 
   return (
-    <ul className={metadataClassName.toString()}>
+    <Meta>
       {author && (
-        <li className={styles.metadataAuthor}>
+        <Author>
           <address>
             {author.avatar && (
               <img
@@ -37,7 +104,7 @@ const Metadata = ({ className, author, date, categories, options = DEFAULT_METAD
               <a rel="author">{author.name}</a>
             </Link>
           </address>
-        </li>
+        </Author>
       )}
       {date && (
         <li>
@@ -47,7 +114,7 @@ const Metadata = ({ className, author, date, categories, options = DEFAULT_METAD
         </li>
       )}
       {Array.isArray(categories) && categories[0] && (
-        <li className={styles.metadataCategories}>
+        <Categories>
           {compactCategories && (
             <p title={categories.map(({ name }) => name).join(', ')}>
               <Link href={categoryPathBySlug(categories[0].slug)}>
@@ -69,14 +136,14 @@ const Metadata = ({ className, author, date, categories, options = DEFAULT_METAD
               })}
             </ul>
           )}
-        </li>
+        </Categories>
       )}
       {isSticky && (
-        <li className={styles.metadataSticky}>
+        <Sticky>
           <FaMapPin aria-label="Sticky Post" />
-        </li>
+        </Sticky>
       )}
-    </ul>
+    </Meta>
   );
 };
 

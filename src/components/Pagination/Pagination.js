@@ -5,7 +5,68 @@ import { Helmet } from 'react-helmet';
 
 import { GrPrevious as PreviousIcon, GrNext as NextIcon } from 'react-icons/gr';
 import { HiOutlineDotsHorizontal as Dots } from 'react-icons/hi';
-import styles from './Pagination.module.scss';
+
+import styled from 'styled-components';
+import { Breakpoints } from 'styles';
+
+const NavWrapper = styled.nav({
+  position: 'relative',
+  display: 'flex',
+  justifyContent: 'flex-end',
+  marginTop: '6em',
+
+  '> *': {
+    display: 'flex',
+    gap: '0.3em',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1em',
+  },
+
+  a: {
+    color: 'grey',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: '1px solid grey',
+    borderRadius: '0.4em',
+    padding: '0.2em 0.8em',
+    '&:hover': {
+      color: 'tomato',
+      backgroundColor: 'grey',
+    },
+    svg: {
+      width: '0.8rem',
+    },
+  },
+  ul: {
+    listStyleType: 'none',
+  },
+});
+
+const Active = styled.span({
+  fontWeight: 600,
+  padding: '0.2em 0.8em',
+});
+
+const Pages = styled.ul({
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+  [Breakpoints.Medium]: {
+    display: 'none',
+  },
+});
+
+const Prev = styled.a({
+  marginRight: 'auto',
+});
+
+const DotsWrapper = styled.li({
+  display: 'flex',
+  alignSelf: 'flex-end',
+  margin: '0 0.2rem -0.2rem 0.2rem',
+});
 
 const MAX_NUM_PAGES = 9;
 
@@ -53,32 +114,32 @@ const Pagination = ({ pagesCount, currentPage, basePath, addCanonical = true }) 
         {hasNextPage && <link rel="next" href={`${homepage}${path}${currentPage + 1}`} />}
       </Helmet>
 
-      <nav className={styles.nav} role="navigation" aria-label="Pagination Navigation">
+      <NavWrapper role="navigation" aria-label="Pagination Navigation">
         {hasPreviousPage && (
-          <Link href={`${path}${currentPage - 1}`}>
-            <a className={styles.prev} aria-label="Goto Previous Page">
+          <Link href={`${path}${currentPage - 1}`} passHref>
+            <Prev aria-label="Goto Previous Page">
               <PreviousIcon /> Previous
-            </a>
+            </Prev>
           </Link>
         )}
 
-        <ul className={styles.pages}>
+        <Pages>
           {hasPrevDots && (
-            <li className={styles.dots}>
+            <DotsWrapper>
               <Dots aria-label={`Navigation to pages 1-${pages[0] - 1} hidden`} />
-            </li>
+            </DotsWrapper>
           )}
           {pages.map((page) => {
             const active = page === currentPage;
             return active ? (
               <li key={page}>
-                <span className={styles.active} aria-label={`Current Page, Page ${page}`} aria-current="true">
+                <Active aria-label={`Current Page, Page ${page}`} aria-current="true">
                   {page}
-                </span>
+                </Active>
               </li>
             ) : (
               <li key={page}>
-                <Link href={`${path}${page}`}>
+                <Link href={`${path}${page}`} passHref>
                   <a aria-label={`Goto Page ${page}`}>
                     <span>{page}</span>
                   </a>
@@ -87,20 +148,20 @@ const Pagination = ({ pagesCount, currentPage, basePath, addCanonical = true }) 
             );
           })}
           {hasNextDots && (
-            <li className={styles.dots}>
+            <DotsWrapper>
               <Dots aria-label={`Navigation to pages ${pages[pages.length - 1] + 1}-${pagesCount} hidden`} />
-            </li>
+            </DotsWrapper>
           )}
-        </ul>
+        </Pages>
 
         {hasNextPage && (
-          <Link href={`${path}${currentPage + 1}`}>
-            <a className={styles.next} aria-label="Goto Next Page">
+          <Link href={`${path}${currentPage + 1}`} passHref>
+            <a aria-label="Goto Next Page">
               Next <NextIcon />
             </a>
           </Link>
         )}
-      </nav>
+      </NavWrapper>
     </>
   );
 };
