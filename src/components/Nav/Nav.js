@@ -1,16 +1,240 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { FaSearch } from 'react-icons/fa';
-
+import styled from 'styled-components';
 import useSite from 'hooks/use-site';
 import useSearch, { SEARCH_STATE_LOADED } from 'hooks/use-search';
 import { postPathBySlug } from 'lib/posts';
 import { findMenuByLocation, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus';
 
 import Section from 'components/Section';
-
-import styles from './Nav.module.scss';
 import NavListItem from 'components/NavListItem';
+import { Breakpoints } from 'styles';
+
+const NavWrapper = styled.nav({
+  width: '100%',
+  borderBottom: '1px solid grey',
+  padding: '0 1rem',
+});
+
+const NavSection = styled(Section)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  height: '100%',
+  paddingTop: 0,
+  paddingBottom: 0,
+  margin: 0,
+
+  [Breakpoints.Small]: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+});
+
+const Name = styled.p({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexShrink: 0,
+  flexGrow: 1,
+  margin: '0.8em 0 0',
+
+  [Breakpoints.Small]: {
+    justifyContent: 'flex-start',
+    marginTop: 0,
+  },
+
+  a: {
+    color: 'gray',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    borderBottom: 'solid 2px transparent',
+
+    [Breakpoints.Small]: {
+      padding: '0.5em',
+      marginLeft: '-0.5em',
+    },
+
+    '&:hover': {
+      color: 'tomato',
+    },
+  },
+});
+
+const Search = styled.div({
+  flexGrow: 0,
+  marginLeft: '1em',
+
+  form: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    padding: '1em',
+
+    [Breakpoints.Small]: {
+      justifyContent: 'flex-end',
+      marginRight: ' -1rem',
+    },
+  },
+
+  input: {
+    fontSize: '0.845em',
+  },
+
+  button: {
+    fontSize: '1.2em',
+    background: 'none',
+    padding: '1.045em',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+
+    '&[disabled]': {
+      svg: {
+        fill: 'grey',
+        transition: 'fill 0.5s',
+      },
+    },
+
+    svg: {
+      fill: 'grey',
+      transform: 'translateY(2px)',
+    },
+
+    '&:focus': {
+      svg: {
+        fill: 'tomato',
+      },
+    },
+  },
+});
+
+const SearchResults = styled.div({
+  display: 'none',
+  position: 'absolute',
+  top: '100%',
+  right: 0,
+  width: '100vw',
+  backgroundColor: 'white',
+  padding: '1.5em',
+  boxShadow: '0 3px 6px rgba(0, 0, 0, 0.3)',
+  borderTop: 'solid 5px tomato',
+  marginRight: '-1rem',
+  zIndex: '999',
+
+  [Breakpoints.Small]: {
+    width: '30em',
+    marginRight: 0,
+  },
+
+  '[data-search-is-active="true"] &': {
+    display: 'block',
+  },
+
+  p: {
+    lineHeight: '1.15',
+    margin: 0,
+  },
+
+  ul: {
+    listStyle: 'none',
+    padding: 0,
+    margin: ' -0.5em 0',
+  },
+
+  a: {
+    display: 'block',
+    color: 'grey',
+    textDecoration: 'none',
+    padding: '0.5em',
+    margin: '0 -0.5em',
+    '&:focus': {
+      outline: '2px solid blue',
+    },
+
+    '&:hover': {
+      color: 'tomato',
+    },
+  },
+});
+
+const SubMenu = styled(NavListItem)({
+  display: 'none',
+  position: 'absolute',
+  whiteSpace: 'nowrap',
+  listStyle: 'none',
+  backgroundColor: '#fff',
+  padding: 0,
+
+  li: {
+    backgroundColor: 'white',
+    margin: 0,
+
+    a: {
+      fontSize: '1rem',
+      padding: '0.3em',
+    },
+  },
+});
+
+const Menu = styled.ul({
+  display: 'flex',
+  alignItems: 'center',
+  flexGrow: 0,
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+
+  li: {
+    position: 'relative',
+    zIndex: 1,
+    margin: '0 0.25em',
+
+    '&:first-child': {
+      marginLeft: 0,
+    },
+
+    '&:last-child': {
+      marginRight: 0,
+    },
+
+    '&:hover': {
+      ' & > a': {
+        color: 'tomato',
+      },
+      [`> ${SubMenu}`]: {
+        display: 'block',
+      },
+    },
+    [`& > ${SubMenu}`]: {
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+      padding: '0.5em 0.8em',
+    },
+
+    [`${SubMenu}`]: {
+      top: 0,
+      left: '100%',
+    },
+  },
+
+  a: {
+    display: 'block',
+    textDecoration: 'none',
+    color: 'grey',
+    fontSize: '1.1em',
+    padding: '0.5em',
+
+    '&:hover': {
+      color: 'tomato',
+    },
+  },
+});
 
 const SEARCH_VISIBLE = 'visible';
 const SEARCH_HIDDEN = 'hidden';
@@ -177,19 +401,19 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className={styles.nav}>
-      <Section className={styles.navSection}>
-        <p className={styles.navName}>
+    <NavWrapper>
+      <NavSection>
+        <Name>
           <Link href="/">
             <a>{title}</a>
           </Link>
-        </p>
-        <ul className={styles.navMenu}>
+        </Name>
+        <Menu>
           {navigation?.map((listItem) => {
-            return <NavListItem key={listItem.id} className={styles.navSubMenu} item={listItem} />;
+            return <SubMenu key={listItem.id} item={listItem} />;
           })}
-        </ul>
-        <div className={styles.navSearch}>
+        </Menu>
+        <Search>
           {searchVisibility === SEARCH_HIDDEN && (
             <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
               <span className="sr-only">Toggle Search</span>
@@ -207,7 +431,7 @@ const Nav = () => {
                 placeholder="Search..."
                 required
               />
-              <div className={styles.navSearchResults}>
+              <SearchResults>
                 {results.length > 0 && (
                   <ul>
                     {results.map(({ slug, title }, index) => {
@@ -226,12 +450,12 @@ const Nav = () => {
                     Sorry, not finding anything for <strong>{query}</strong>
                   </p>
                 )}
-              </div>
+              </SearchResults>
             </form>
           )}
-        </div>
-      </Section>
-    </nav>
+        </Search>
+      </NavSection>
+    </NavWrapper>
   );
 };
 

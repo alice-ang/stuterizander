@@ -1,16 +1,16 @@
-import ClassName from 'models/classname';
+import styled from 'styled-components';
 
-import styles from './Section.module.scss';
+const SectionWrapper = styled.section({
+  width: '100%',
+  padding: '2rem 0',
+  margin: ' 3rem 0',
+});
 
-const Section = ({ children, className, ...rest }) => {
-  const sectionClassName = new ClassName(styles.section);
-
-  sectionClassName.addIf(className, className);
-
+const Section = ({ className, children, ...rest }) => {
   return (
-    <section className={sectionClassName.toString()} {...rest}>
+    <SectionWrapper className={className} {...rest}>
       {children}
-    </section>
+    </SectionWrapper>
   );
 };
 

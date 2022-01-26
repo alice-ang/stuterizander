@@ -1,13 +1,13 @@
-import ClassName from 'models/classname';
+import styled from 'styled-components';
 
-import styles from './Container.module.scss';
+const ContainerWrapper = styled.div({
+  maxWidth: '60rem',
+  padding: '0 2rem',
+  margin: '0 auto',
+});
 
-const Container = ({ children, className }) => {
-  const containerClassName = new ClassName(styles.container);
-
-  containerClassName.addIf(className, className);
-
-  return <div className={containerClassName.toString()}>{children}</div>;
+const Container = ({ children }) => {
+  return <ContainerWrapper>{children}</ContainerWrapper>;
 };
 
 export default Container;

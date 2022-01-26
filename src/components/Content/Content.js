@@ -1,13 +1,26 @@
-import ClassName from 'models/classname';
+import styled from 'styled-components';
 
-import styles from './Content.module.scss';
+const ContentWrapper = styled.div({
+  fontSize: '1.5rem',
 
-const Content = ({ children, className }) => {
-  const contentClassName = new ClassName(styles.content);
+  'h2,h3,h4,p,ul': {
+    '&:first-child': {
+      marginTop: 0,
+    },
 
-  contentClassName.addIf(className, className);
+    '&:last-child': {
+      marginBottom: 0,
+    },
+  },
 
-  return <div className={contentClassName.toString()}>{children}</div>;
+  img: {
+    display: 'block',
+    margin: ' 0 auto',
+  },
+});
+
+const Content = ({ children }) => {
+  return <ContentWrapper>{children}</ContentWrapper>;
 };
 
 export default Content;
