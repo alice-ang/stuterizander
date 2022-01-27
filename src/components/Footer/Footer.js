@@ -48,6 +48,7 @@ const getMenuTitleStyling = () => css`
   text-decoration: underline;
   margin-bottom: 1.4em;
   margin-top: 0;
+  font-size: 1.2em;
 `;
 
 const FooterMenuTitle = styled.a({
