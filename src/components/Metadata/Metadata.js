@@ -79,7 +79,6 @@ const Categories = styled.li({
 });
 
 const Sticky = styled.li({
-  fontSize: '1.15em',
   color: 'grey',
 });
 

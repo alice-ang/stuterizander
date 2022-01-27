@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { postPathBySlug, sanitizeExcerpt } from 'lib/posts';
 
 import Metadata from 'components/Metadata';
-
 import { FaMapPin } from 'react-icons/fa';
 import styled from 'styled-components';
+import { theme } from 'styles';
 
 const PostCardWrapper = styled.div({
   position: 'relative',
@@ -13,6 +13,9 @@ const PostCardWrapper = styled.div({
   color: 'inherit',
   textAlign: 'left',
   textDecoration: 'none',
+  backgroundColor: theme.brand.light,
+  boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+  borderRadius: 4,
 
   '& > a': {
     display: 'block',
@@ -22,7 +25,6 @@ const PostCardWrapper = styled.div({
     '&:hover': {
       h3: {
         color: 'tomato',
-        textDecoration: 'underline',
       },
     },
   },
@@ -36,18 +38,19 @@ const PostCardStickyWrapper = styled.div({
     position: 'absolute',
     top: '1.2em',
     right: '1em',
-    fontSize: '1.15em',
     color: 'grey',
   },
 });
 
 const CardTitle = styled.h3({
-  margin: '0 0 1em 0',
-  fontSize: '1.5em',
+  margin: 0,
+});
+
+const CardImage = styled.img({
+  float: 'right',
 });
 
 const CardContent = styled.div({
-  fontSize: '1.25em',
   margin: 0,
 
   p: {
@@ -66,8 +69,12 @@ const StyledMetadata = styled(Metadata)({
 });
 
 const PostCard = ({ post, options = {} }) => {
-  const { title, excerpt, slug, date, author, categories, isSticky = false } = post;
+  const { title, excerpt, slug, date, author, categories, featuredImage, isSticky = false } = post;
   const { excludeMetadata = [] } = options;
+
+  if (featuredImage) {
+    console.log('YAY');
+  }
 
   const metadata = {};
 
@@ -117,6 +124,13 @@ const PostCard = ({ post, options = {} }) => {
               />
             </a>
           </Link>
+          {featuredImage && (
+            <CardImage
+              {...featuredImage}
+              src={featuredImage.sourceUrl}
+              dangerouslySetInnerHTML={featuredImage.caption}
+            />
+          )}
           <StyledMetadata {...metadata} />
           {excerpt && (
             <CardContent

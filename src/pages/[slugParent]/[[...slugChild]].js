@@ -20,8 +20,6 @@ import styles from 'styles/pages/Page.module.scss';
 export default function Page({ page, breadcrumbs }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
 
-  console.log(page);
-
   const { metadata: siteMetadata = {} } = useSite();
 
   const { metadata } = usePageMetadata({

@@ -17,7 +17,6 @@ const ImageWrapper = styled.figure({
 
   figcaption: {
     color: 'grey',
-    fontSize: '0.9em',
     textAlign: 'center',
     fontStyle: 'italic',
     marginTop: '1em',

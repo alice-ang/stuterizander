@@ -13,8 +13,8 @@ import { Breakpoints } from 'styles';
 
 const NavWrapper = styled.nav({
   width: '100%',
-  borderBottom: '1px solid grey',
-  padding: '0 1rem',
+  padding: '0.5rem',
+  boxShadow: '0 0 20px 0 rgb(0 0 0 / 10%)',
 });
 
 const NavSection = styled(Section)({
@@ -48,11 +48,10 @@ const Name = styled.p({
 
   a: {
     color: 'gray',
-    fontSize: '1.2rem',
     fontWeight: 'bold',
     textDecoration: 'none',
     borderBottom: 'solid 2px transparent',
-
+    fontSize: '1.3em',
     [Breakpoints.Small]: {
       padding: '0.5em',
       marginLeft: '-0.5em',
@@ -83,12 +82,7 @@ const Search = styled.div({
     },
   },
 
-  input: {
-    fontSize: '0.845em',
-  },
-
   button: {
-    fontSize: '1.2em',
     background: 'none',
     padding: '1.045em',
     border: 'none',
@@ -120,16 +114,14 @@ const SearchResults = styled.div({
   position: 'absolute',
   top: '100%',
   right: 0,
-  width: '100vw',
   backgroundColor: 'white',
   padding: '1.5em',
-  boxShadow: '0 3px 6px rgba(0, 0, 0, 0.3)',
+  boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
   borderTop: 'solid 5px tomato',
-  marginRight: '-1rem',
   zIndex: '999',
 
   [Breakpoints.Small]: {
-    width: '30em',
+    width: '100%',
     marginRight: 0,
   },
 
@@ -177,7 +169,6 @@ const SubMenu = styled(NavListItem)({
     margin: 0,
 
     a: {
-      fontSize: '1rem',
       padding: '0.3em',
     },
   },
@@ -227,7 +218,6 @@ const Menu = styled.ul({
     display: 'block',
     textDecoration: 'none',
     color: 'grey',
-    fontSize: '1.1em',
     padding: '0.5em',
 
     '&:hover': {

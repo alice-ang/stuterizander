@@ -1,19 +1,13 @@
 import Container from 'components/Container';
 
 import styled from 'styled-components';
-import { Breakpoints } from 'styles';
 
 const HeaderWrapper = styled.header({
-  margin: '5rem 0',
   h1: {
     margin: 0,
     lineHeight: 1.15,
-    fontSize: '3rem',
     textAlign: 'center',
 
-    [Breakpoints.Small]: {
-      fontSize: '4rem',
-    },
     a: {
       color: 'tomato',
       textDecoration: 'none',

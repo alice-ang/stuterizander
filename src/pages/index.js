@@ -2,6 +2,8 @@ import useSite from 'hooks/use-site';
 import { getPaginatedPosts } from 'lib/posts';
 import { WebsiteJsonLd } from 'lib/json-ld';
 
+import styled from 'styled-components';
+
 import Layout from 'components/Layout';
 import Header from 'components/Header';
 import Section from 'components/Section';
@@ -11,8 +13,15 @@ import Pagination from 'components/Pagination';
 
 import styles from 'styles/pages/Home.module.scss';
 
-export default function Home({ posts, pagination }) {
-  const { metadata = {} } = useSite();
+const StyledSection = styled(Section)({
+  marginTop: '4em',
+});
+
+export default function Home({ pagination }) {
+  const { metadata = {}, recentPosts = [] } = useSite();
+
+  const hasRecentPosts = Array.isArray(recentPosts) && recentPosts.length > 0;
+
   const { title, description } = metadata;
 
   return (
@@ -33,11 +42,11 @@ export default function Home({ posts, pagination }) {
         />
       </Header>
 
-      <Section>
+      <StyledSection>
         <Container>
           <h2 className="sr-only">Posts</h2>
           <ul className={styles.posts}>
-            {posts.map((post) => {
+            {hasRecentPosts.map((post) => {
               return (
                 <li key={post.slug}>
                   <PostCard post={post} />
@@ -54,7 +63,7 @@ export default function Home({ posts, pagination }) {
             />
           )}
         </Container>
-      </Section>
+      </StyledSection>
     </Layout>
   );
 }

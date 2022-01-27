@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const ContentWrapper = styled.div({
-  fontSize: '1.5rem',
   'h2,h3,h4,p,ul': {
     '&:first-child': {
       marginTop: 0,
