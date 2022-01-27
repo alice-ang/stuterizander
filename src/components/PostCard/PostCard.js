@@ -21,7 +21,7 @@ const PostCardWrapper = styled.div({
     display: 'block',
     color: 'inherit',
     textDecoration: 'none',
-
+    width: 'fit-content',
     '&:hover': {
       h3: {
         color: 'tomato',
