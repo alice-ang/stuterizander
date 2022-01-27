@@ -37,7 +37,6 @@ const Overlay = styled.div({
 });
 
 const Hero = ({ image, children }) => {
-  console.log(image);
   return (
     <HeroContainer>
       <HeroImage src={image.sourceUrl} alt={image.altText} srcSet={image.srcSet} width="100%" />

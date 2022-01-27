@@ -48,6 +48,7 @@ const CardTitle = styled.h3({
 
 const CardImage = styled.img({
   float: 'right',
+  paddingLeft: 'inherit',
 });
 
 const CardContent = styled.div({
@@ -71,11 +72,6 @@ const StyledMetadata = styled(Metadata)({
 const PostCard = ({ post, options = {} }) => {
   const { title, excerpt, slug, date, author, categories, featuredImage, isSticky = false } = post;
   const { excludeMetadata = [] } = options;
-
-  if (featuredImage) {
-    console.log('YAY');
-  }
-
   const metadata = {};
 
   if (!excludeMetadata.includes('author')) {
