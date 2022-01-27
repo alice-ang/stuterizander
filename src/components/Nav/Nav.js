@@ -9,12 +9,13 @@ import { findMenuByLocation, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus'
 
 import Section from 'components/Section';
 import NavListItem from 'components/NavListItem';
-import { Breakpoints } from 'styles';
+import { Breakpoints, theme } from 'styles';
 
 const NavWrapper = styled.nav({
   width: '100%',
   padding: '0.5rem',
   boxShadow: '0 0 20px 0 rgb(0 0 0 / 10%)',
+  backgroundColor: theme.brand.dark,
 });
 
 const NavSection = styled(Section)({
@@ -47,7 +48,7 @@ const Name = styled.p({
   },
 
   a: {
-    color: 'gray',
+    color: theme.text.light,
     fontWeight: 'bold',
     textDecoration: 'none',
     borderBottom: 'solid 2px transparent',
@@ -97,7 +98,7 @@ const Search = styled.div({
     },
 
     svg: {
-      fill: 'grey',
+      color: theme.text.light,
       transform: 'translateY(2px)',
     },
 
@@ -165,10 +166,10 @@ const SubMenu = styled(NavListItem)({
   padding: 0,
 
   li: {
-    backgroundColor: 'white',
     margin: 0,
 
     a: {
+      color: theme.text.light,
       padding: '0.3em',
     },
   },
@@ -217,7 +218,7 @@ const Menu = styled.ul({
   a: {
     display: 'block',
     textDecoration: 'none',
-    color: 'grey',
+    color: theme.text.light,
     padding: '0.5em',
 
     '&:hover': {

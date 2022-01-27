@@ -14,7 +14,10 @@ const ImageWrapper = styled.figure({
       marginTop: 0,
     },
   },
-
+  img: {
+    border: 'none',
+    padding: 0,
+  },
   figcaption: {
     color: 'grey',
     textAlign: 'center',

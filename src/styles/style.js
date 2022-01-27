@@ -14,6 +14,7 @@ export const theme = {
     alternateComplementary: '#7A253E',
     tomato: 'tomato',
     light: '#fff',
+    dark: '#383838',
   },
   text: {
     normal: '#a3a1a1',
