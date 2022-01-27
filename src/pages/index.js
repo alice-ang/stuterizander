@@ -11,7 +11,28 @@ import Container from 'components/Container';
 import PostCard from 'components/PostCard';
 import Pagination from 'components/Pagination';
 
-import styles from 'styles/pages/Home.module.scss';
+const PostList = styled.ul({
+  listStyle: 'none',
+  paddingLeft: 0,
+
+  '& > li': {
+    margin: '2em 0',
+
+    '&:first-child': {
+      marginTop: 0,
+    },
+
+    '&:last-child': {
+      marginBottom: 0,
+    },
+  },
+});
+
+const Description = styled.p({
+  textAlign: 'center',
+  lineHeight: '1.5',
+  fontSize: '1.5rem',
+});
 
 const StyledSection = styled(Section)({
   marginTop: '4em',
@@ -32,8 +53,7 @@ export default function Home({ posts, pagination }) {
           }}
         />
 
-        <p
-          className={styles.description}
+        <Description
           dangerouslySetInnerHTML={{
             __html: description,
           }}
@@ -43,7 +63,7 @@ export default function Home({ posts, pagination }) {
       <StyledSection>
         <Container>
           <h2 className="sr-only">Posts</h2>
-          <ul className={styles.posts}>
+          <PostList>
             {posts.map((post) => {
               return (
                 <li key={post.slug}>
@@ -51,7 +71,7 @@ export default function Home({ posts, pagination }) {
                 </li>
               );
             })}
-          </ul>
+          </PostList>
           {pagination && (
             <Pagination
               addCanonical={false}

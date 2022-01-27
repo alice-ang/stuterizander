@@ -5,7 +5,7 @@ import { postPathBySlug, sanitizeExcerpt } from 'lib/posts';
 import Metadata from 'components/Metadata';
 import { FaMapPin } from 'react-icons/fa';
 import styled from 'styled-components';
-import { theme } from 'styles';
+import { Breakpoints, theme } from 'styles';
 
 const PostCardWrapper = styled.div({
   position: 'relative',
@@ -48,7 +48,10 @@ const CardTitle = styled.h3({
 
 const CardImage = styled.img({
   float: 'right',
-  paddingLeft: 'inherit',
+  padding: 0,
+  [Breakpoints.Medium]: {
+    padding: '0px 0px 10px 10px',
+  },
 });
 
 const CardContent = styled.div({
