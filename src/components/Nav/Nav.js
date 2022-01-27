@@ -12,7 +12,6 @@ import NavListItem from 'components/NavListItem';
 import { Breakpoints, theme } from 'styles';
 
 const NavWrapper = styled.nav({
-  width: '100%',
   padding: '0.5rem',
   boxShadow: '0 0 20px 0 rgb(0 0 0 / 10%)',
   backgroundColor: theme.brand.dark,
@@ -20,18 +19,13 @@ const NavWrapper = styled.nav({
 
 const NavSection = styled(Section)({
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
+  alignItems: 'baseline',
+  flexWrap: 'wrap',
   height: '100%',
   paddingTop: 0,
   paddingBottom: 0,
   margin: 0,
-
-  [Breakpoints.Small]: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
+  justifyContent: 'space-around',
 });
 
 const Name = styled.p({
