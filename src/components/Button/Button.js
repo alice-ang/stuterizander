@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const StyledButton = styled.button({
   color: 'white',
   fontFamily: 'inherit',
-  fontSize: '1.3em',
   fontWeight: 700,
   backgroundColor: 'tomto',
   padding: ' 0.8em 1.4em',

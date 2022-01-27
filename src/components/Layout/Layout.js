@@ -24,7 +24,6 @@ const Layout = ({ children }) => {
   if (!metadata.og) {
     metadata.og = {};
   }
-
   metadata.og.url = `${homepage}${asPath}`;
 
   const helmetSettings = {

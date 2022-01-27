@@ -20,7 +20,6 @@ const NavWrapper = styled.nav({
     gap: '0.3em',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '1em',
   },
 
   a: {
