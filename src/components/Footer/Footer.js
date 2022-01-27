@@ -20,18 +20,22 @@ const FooterMenu = styled(Section)({
     listStyle: 'none',
     padding: 0,
   },
+
+  [Breakpoints.Large]: {
+    maxWidth: '60%',
+    margin: '0 auto',
+  },
 });
 
 const FooterMenuColumns = styled.ul({
   display: 'flex',
   width: '100%',
-  justifyContent: 'center',
+  justifyContent: 'space-around',
   flexWrap: 'wrap',
 
   '& > li': {},
 
   [Breakpoints.Medium]: {
-    justifyContent: 'space-between',
     '& > li': {
       maxWidth: '15em',
       margin: '2em',
