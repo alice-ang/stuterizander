@@ -17,10 +17,8 @@ const StyledSection = styled(Section)({
   marginTop: '4em',
 });
 
-export default function Home({ pagination }) {
-  const { metadata = {}, recentPosts = [] } = useSite();
-
-  const hasRecentPosts = Array.isArray(recentPosts) && recentPosts.length > 0;
+export default function Home({ posts, pagination }) {
+  const { metadata = {} } = useSite();
 
   const { title, description } = metadata;
 
@@ -46,7 +44,7 @@ export default function Home({ pagination }) {
         <Container>
           <h2 className="sr-only">Posts</h2>
           <ul className={styles.posts}>
-            {hasRecentPosts.map((post) => {
+            {posts.map((post) => {
               return (
                 <li key={post.slug}>
                   <PostCard post={post} />
