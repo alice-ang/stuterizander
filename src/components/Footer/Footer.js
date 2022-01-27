@@ -41,7 +41,7 @@ const FooterMenuColumns = styled.ul({
 
 const getMenuTitleStyling = () => css`
   display: inline-block;
-  color: $color-gray-800;
+  color: tomato;
   text-decoration: none;
   margin-bottom: 1.4em;
   margin-top: 0;
@@ -53,6 +53,7 @@ const FooterMenuTitle = styled.a({
 
 const FooterMenuPTitle = styled.p({
   ...getMenuTitleStyling(),
+  margin: 0,
 });
 
 const FooterMenuItems = styled.ul({

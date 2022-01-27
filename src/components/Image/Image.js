@@ -1,26 +1,34 @@
-import ClassName from 'models/classname';
+import styled from 'styled-components';
 
-import styles from './Image.module.scss';
+const ImageWrapper = styled.figure({
+  div: {
+    overflow: 'hidden',
+    margin: 0,
+  },
+  p: {
+    '&:first-child': {
+      marginTop: 0,
+    },
 
-const Image = ({
-  children,
-  className,
-  width = '100%',
-  height = 'auto',
-  src,
-  alt,
-  srcSet,
-  sizes,
-  dangerouslySetInnerHTML,
-}) => {
-  const imageClassName = new ClassName(styles.image);
+    '&:last-child': {
+      marginTop: 0,
+    },
+  },
 
-  imageClassName.addIf(className, className);
+  figcaption: {
+    color: 'grey',
+    fontSize: '0.9em',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    marginTop: '1em',
+  },
+});
 
+const Image = ({ children, width = '100%', height = 'auto', src, alt, srcSet, dangerouslySetInnerHTML }) => {
   return (
-    <figure className={imageClassName.toString()}>
-      <div className={styles.featuredImageImg}>
-        <img width={width} height={height} src={src} alt={alt || ''} srcSet={srcSet} sizes={sizes} />
+    <ImageWrapper>
+      <div>
+        <img width={width} height={height} src={src} alt={alt || ''} srcSet={srcSet} />
       </div>
       {children && <figcaption>{children}</figcaption>}
       {dangerouslySetInnerHTML && (
@@ -30,7 +38,7 @@ const Image = ({
           }}
         />
       )}
-    </figure>
+    </ImageWrapper>
   );
 };
 

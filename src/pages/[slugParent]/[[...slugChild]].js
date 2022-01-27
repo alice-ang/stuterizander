@@ -14,11 +14,13 @@ import Section from 'components/Section';
 import Container from 'components/Container';
 import FeaturedImage from 'components/FeaturedImage';
 import Breadcrumbs from 'components/Breadcrumbs';
-
+import Hero from 'components/Hero';
 import styles from 'styles/pages/Page.module.scss';
 
 export default function Page({ page, breadcrumbs }) {
-  const { title, metaTitle, description, slug, content, featuredImage, children } = page;
+  const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
+
+  console.log(page);
 
   const { metadata: siteMetadata = {} } = useSite();
 
@@ -61,12 +63,17 @@ export default function Page({ page, breadcrumbs }) {
             dangerouslySetInnerHTML={featuredImage.caption}
           />
         )}
-        <h1 className={styles.title}>{title}</h1>
       </Header>
 
       <Content>
         <Section>
           <Container>
+            {hero && (
+              <Hero image={hero.heroImage}>
+                <h2>{hero.heroText}</h2>
+                <p>{hero.heroSubtitle}</p>
+              </Hero>
+            )}
             <div
               className={styles.content}
               dangerouslySetInnerHTML={{

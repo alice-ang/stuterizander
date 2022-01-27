@@ -18,6 +18,18 @@ export const QUERY_ALL_PAGES = gql`
               }
             }
           }
+          hero {
+            fieldGroupName
+            heroSubtitle
+            heroText
+            heroImage {
+              altText
+              sourceUrl
+              srcSet
+              srcSet
+              sizes
+            }
+          }
           content
           featuredImage {
             node {
@@ -64,6 +76,18 @@ export const QUERY_PAGE_BY_URI = gql`
               title
             }
           }
+        }
+      }
+      hero {
+        fieldGroupName
+        heroSubtitle
+        heroText
+        heroImage {
+          altText
+          sourceUrl
+          srcSet
+          srcSet
+          sizes
         }
       }
       content
