@@ -7,14 +7,15 @@ import useSearch, { SEARCH_STATE_LOADED } from 'hooks/use-search';
 import { postPathBySlug } from 'lib/posts';
 import { findMenuByLocation, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus';
 
+import { GiHamburgerMenu } from 'react-icons/gi';
 import Section from 'components/Section';
 import NavListItem from 'components/NavListItem';
 import { Breakpoints, theme } from 'styles';
 
 const NavWrapper = styled.nav({
-  padding: '0.5rem',
   boxShadow: '0 0 20px 0 rgb(0 0 0 / 10%)',
   backgroundColor: theme.brand.dark,
+  padding: '0px 1em',
 });
 
 const NavSection = styled(Section)({
@@ -25,22 +26,10 @@ const NavSection = styled(Section)({
   paddingTop: 0,
   paddingBottom: 0,
   margin: 0,
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
 });
 
 const Name = styled.p({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexShrink: 0,
-  flexGrow: 1,
-  margin: '0.8em 0 0',
-
-  [Breakpoints.Small]: {
-    justifyContent: 'flex-start',
-    marginTop: 0,
-  },
-
   a: {
     color: theme.text.light,
     fontWeight: 'bold',
@@ -110,18 +99,19 @@ const SearchResults = styled.div({
   top: '100%',
   right: 0,
   backgroundColor: 'white',
-  padding: '1.5em',
+  padding: '1em',
   boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
   borderTop: `solid 5px ${theme.brand.alternate}`,
   zIndex: '999',
 
-  [Breakpoints.Small]: {
-    width: '100%',
-    marginRight: 0,
-  },
-
   '[data-search-is-active="true"] &': {
     display: 'block',
+
+    [Breakpoints.Small]: {
+      width: '100%',
+      marginRight: 0,
+      height: '70vh',
+    },
   },
 
   p: {
@@ -141,9 +131,6 @@ const SearchResults = styled.div({
     textDecoration: 'none',
     padding: '0.5em',
     margin: '0 -0.5em',
-    '&:focus': {
-      outline: '2px solid blue',
-    },
 
     '&:hover': {
       color: 'tomato',
@@ -214,10 +201,58 @@ const Menu = styled.ul({
     textDecoration: 'none',
     color: theme.text.light,
     padding: '0.5em',
-
     '&:hover': {
       color: 'tomato',
     },
+  },
+});
+
+const MobileNav = styled(GiHamburgerMenu)({
+  display: 'block',
+  [Breakpoints.Medium]: {
+    display: 'none',
+  },
+});
+
+const MenuSectionDesktop = styled.div({
+  display: 'none',
+  flexDirection: 'row',
+  [Breakpoints.Medium]: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+});
+
+const MenuSectionMobile = styled.div({
+  display: 'block',
+  ul: {
+    listStyle: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    padding: 0,
+    height: '100vh',
+    span: {
+      borderBottom: `1px solid rgb(229, 229, 229)`,
+      width: '100%',
+      height: 'fit-content',
+    },
+    li: {
+      a: {
+        fontSize: '1.3em',
+        width: '100%',
+        margin: 0,
+        fontWeight: 'bold',
+        color: theme.text.neutral,
+        // textDecoration: 'none',
+        // padding: '1em',
+        // pointerEvents: 'none',
+      },
+    },
+  },
+
+  [Breakpoints.Medium]: {
+    display: 'none',
   },
 });
 
@@ -228,7 +263,7 @@ const Nav = () => {
   const formRef = useRef();
 
   const [searchVisibility, setSearchVisibility] = useState(SEARCH_HIDDEN);
-
+  const [toggle, setToggle] = useState(false);
   const { metadata = {}, menus } = useSite();
   const { title } = metadata;
 
@@ -273,25 +308,13 @@ const Nav = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchVisibility]);
 
-  /**
-   * addDocumentOnClick
-   */
-
   function addDocumentOnClick() {
     document.body.addEventListener('click', handleOnDocumentClick, true);
   }
 
-  /**
-   * removeDocumentOnClick
-   */
-
   function removeDocumentOnClick() {
     document.body.removeEventListener('click', handleOnDocumentClick, true);
   }
-
-  /**
-   * handleOnDocumentClick
-   */
 
   function handleOnDocumentClick(e) {
     if (!e.composedPath().includes(formRef.current)) {
@@ -300,43 +323,22 @@ const Nav = () => {
     }
   }
 
-  /**
-   * handleOnSearch
-   */
-
   function handleOnSearch({ currentTarget }) {
     search({
       query: currentTarget.value,
     });
   }
 
-  /**
-   * handleOnToggleSearch
-   */
-
   function handleOnToggleSearch() {
     setSearchVisibility(SEARCH_VISIBLE);
   }
 
-  /**
-   * addResultsRoving
-   */
-
   function addResultsRoving() {
     document.body.addEventListener('keydown', handleResultsRoving);
   }
-
-  /**
-   * removeResultsRoving
-   */
-
   function removeResultsRoving() {
     document.body.removeEventListener('keydown', handleResultsRoving);
   }
-
-  /**
-   * handleResultsRoving
-   */
 
   function handleResultsRoving(e) {
     const focusElement = document.activeElement;
@@ -362,12 +364,6 @@ const Nav = () => {
     }
   }
 
-  /**
-   * escFunction
-   */
-
-  // pressing esc while search is focused will close it
-
   const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
       clearSearch();
@@ -386,61 +382,131 @@ const Nav = () => {
   }, []);
 
   return (
-    <NavWrapper>
-      <NavSection>
-        <Name>
-          <Link href="/">
-            <a>{title}</a>
-          </Link>
-        </Name>
-        <Menu>
-          {navigation?.map((listItem) => {
-            return <SubMenu key={listItem.id} item={listItem} />;
-          })}
-        </Menu>
-        <Search>
-          {searchVisibility === SEARCH_HIDDEN && (
-            <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
-              <span className="sr-only">Toggle Search</span>
-              <FaSearch />
-            </button>
-          )}
-          {searchVisibility === SEARCH_VISIBLE && (
-            <form ref={formRef} action="/search" data-search-is-active={!!query}>
-              <input
-                type="search"
-                name="q"
-                value={query || ''}
-                onChange={handleOnSearch}
-                autoComplete="off"
-                placeholder="Search..."
-                required
-              />
-              <SearchResults>
-                {results.length > 0 && (
-                  <ul>
-                    {results.map(({ slug, title }, index) => {
-                      return (
-                        <li key={slug}>
-                          <Link tabIndex={index} href={postPathBySlug(slug)}>
-                            <a>{title}</a>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-                {results.length === 0 && (
-                  <p>
-                    Sorry, not finding anything for <strong>{query}</strong>
-                  </p>
-                )}
-              </SearchResults>
-            </form>
-          )}
-        </Search>
-      </NavSection>
-    </NavWrapper>
+    <>
+      <NavWrapper>
+        <NavSection>
+          <Name>
+            <Link href="/">
+              <a>{title}</a>
+            </Link>
+          </Name>
+          <MenuSectionDesktop>
+            <Menu>
+              {navigation?.map((listItem) => {
+                return <SubMenu key={listItem.id} item={listItem} />;
+              })}
+            </Menu>
+            <Search>
+              {searchVisibility === SEARCH_HIDDEN && (
+                <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
+                  <span className="sr-only">Toggle Search</span>
+                  <FaSearch />
+                </button>
+              )}
+              {searchVisibility === SEARCH_VISIBLE && (
+                <form ref={formRef} action="/search" data-search-is-active={!!query}>
+                  <input
+                    type="search"
+                    name="q"
+                    value={query || ''}
+                    onChange={handleOnSearch}
+                    autoComplete="off"
+                    placeholder="Search..."
+                    required
+                  />
+                  <SearchResults>
+                    {results.length > 0 && (
+                      <ul>
+                        {results.map(({ slug, title }, index) => {
+                          return (
+                            <li key={slug}>
+                              <Link tabIndex={index} href={postPathBySlug(slug)}>
+                                <a>{title}</a>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                    {results.length === 0 && (
+                      <p>
+                        Sorry, not finding anything for <strong>{query}</strong>
+                      </p>
+                    )}
+                  </SearchResults>
+                </form>
+              )}
+            </Search>
+          </MenuSectionDesktop>
+          <span
+            onClick={() => {
+              setToggle(!toggle);
+            }}
+          >
+            <MobileNav size={20} color={theme.text.light} />
+          </span>
+        </NavSection>
+      </NavWrapper>
+      {toggle && (
+        <MenuSectionMobile>
+          <Menu>
+            <Search>
+              {searchVisibility === SEARCH_HIDDEN && (
+                <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
+                  <span className="sr-only">Toggle Search</span>
+                  <FaSearch color={theme.brand.dark} />
+                </button>
+              )}
+              {searchVisibility === SEARCH_VISIBLE && (
+                <form ref={formRef} action="/search" data-search-is-active={!!query}>
+                  <input
+                    type="search"
+                    name="q"
+                    value={query || ''}
+                    onChange={handleOnSearch}
+                    autoComplete="off"
+                    placeholder="Search..."
+                    required
+                  />
+                  <SearchResults>
+                    {results.length > 0 && (
+                      <ul>
+                        {results.map(({ slug, title }, index) => {
+                          return (
+                            <li key={slug}>
+                              <Link tabIndex={index} href={postPathBySlug(slug)}>
+                                <a>{title}</a>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                    {results.length === 0 && (
+                      <p>
+                        Sorry, not finding anything for <strong>{query}</strong>
+                      </p>
+                    )}
+                  </SearchResults>
+                </form>
+              )}
+            </Search>
+            {navigation?.map((listItem) => {
+              return (
+                <span
+                  key={listItem.id}
+                  onClick={() => {
+                    setToggle(!toggle);
+                  }}
+                >
+                  <SubMenu item={listItem} />
+                </span>
+              );
+            })}
+          </Menu>
+        </MenuSectionMobile>
+      )}
+    </>
   );
 };
 

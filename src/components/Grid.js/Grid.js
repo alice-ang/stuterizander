@@ -8,7 +8,7 @@ const GridTitle = styled.h2({
 
 const ProductGrid = styled.div({
   display: 'grid',
-  gridTemplateColumns: `repeat(auto-fill, minmax(120px, 1fr))`,
+  gridTemplateColumns: `repeat(auto-fit, minmax(120px, 1fr))`,
   gridGap: '0.5em',
   margin: 0,
   borderRadius: 5,

@@ -25,12 +25,6 @@ const PostCardWrapper = styled.div({
     color: 'inherit',
     textDecoration: 'none',
     width: 'fit-content',
-    '&:hover': {
-      h3: {
-        color: 'tomato',
-        textDecoration: 'none',
-      },
-    },
   },
 });
 
@@ -43,6 +37,9 @@ const PostCardStickyWrapper = styled(PostCardWrapper)({
 const CardTitle = styled.h3({
   margin: 0,
   color: theme.text.neutral,
+  '&:hover': {
+    color: 'tomato',
+  },
 });
 
 const CardImageLarge = styled.img({
@@ -85,6 +82,9 @@ const StyledMetadata = styled(Metadata)({
 const Column = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  a: {
+    textDecoration: 'none',
+  },
 });
 
 const PostCard = ({ post, options = {} }) => {
@@ -110,7 +110,7 @@ const PostCard = ({ post, options = {} }) => {
         <PostCardStickyWrapper>
           {isSticky && (
             <div>
-              <FaMapPin aria-label="Sticky Post" color="red" size={20} />
+              <FaMapPin aria-label="Sticky Post" color="tomato" size={20} />
             </div>
           )}
           <Column>
