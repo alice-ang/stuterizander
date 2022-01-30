@@ -6,7 +6,6 @@ const SectionTitleWrapper = styled.h2({
   paddingBottom: '1em',
   borderBottom: 'solid 1px grey',
   marginTop: 0,
-  marginBottom: '3.5em',
 });
 
 const SectionTitle = ({ children }) => {

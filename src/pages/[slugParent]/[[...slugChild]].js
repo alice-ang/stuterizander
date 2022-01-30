@@ -66,7 +66,7 @@ export default function Page({ page, breadcrumbs }) {
       <Content>
         <Section>
           <Container>
-            {hero && (
+            {hero.heroImage && (
               <Hero image={hero.heroImage}>
                 <h2>{hero.heroText}</h2>
                 <p>{hero.heroSubtitle}</p>

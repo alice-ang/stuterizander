@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
 const ContainerWrapper = styled.div({
-  maxWidth: '60rem',
-  padding: '0 2rem',
+  padding: '0 1rem',
   margin: '0 auto',
+
+  [Breakpoints.Large]: {
+    maxWidth: '70%',
+  },
 });
 
 const Container = ({ children }) => {

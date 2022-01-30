@@ -112,7 +112,7 @@ const SearchResults = styled.div({
   backgroundColor: 'white',
   padding: '1.5em',
   boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
-  borderTop: 'solid 5px tomato',
+  borderTop: `solid 5px ${theme.brand.alternate}`,
   zIndex: '999',
 
   [Breakpoints.Small]: {

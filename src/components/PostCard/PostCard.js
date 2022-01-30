@@ -69,7 +69,9 @@ const CardContent = styled.div({
 });
 
 const StyledMetadata = styled(Metadata)({
-  margin: '-0.8em -0.8em 0.4em',
+  '* >li': {
+    margin: 0,
+  },
 });
 
 const PostCard = ({ post, options = {} }) => {
