@@ -26,7 +26,7 @@ const Meta = styled.ul({
   },
 
   '& > li': {
-    margin: '0.8em',
+    margin: '0.4em 0.8em 0px 0.8em',
   },
 
   p: {

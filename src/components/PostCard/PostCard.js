@@ -34,15 +34,10 @@ const PostCardWrapper = styled.div({
   },
 });
 
-const PostCardStickyWrapper = styled.div({
+const PostCardStickyWrapper = styled(PostCardWrapper)({
+  boxShadow: 'unset',
   border: 'solid 0.02em grey',
   borderRadius: '1em',
-  svg: {
-    position: 'absolute',
-    top: '1.2em',
-    right: '1em',
-    color: 'grey',
-  },
 });
 
 const CardTitle = styled.h3({
@@ -113,22 +108,43 @@ const PostCard = ({ post, options = {} }) => {
     <>
       {isSticky ? (
         <PostCardStickyWrapper>
-          {isSticky && <FaMapPin aria-label="Sticky Post" />}
-          <Link href={postPathBySlug(slug)}>
-            <a>
-              <CardTitle
+          {isSticky && (
+            <div>
+              <FaMapPin aria-label="Sticky Post" color="red" size={20} />
+            </div>
+          )}
+          <Column>
+            <Link href={postPathBySlug(slug)}>
+              <a>
+                <CardTitle
+                  dangerouslySetInnerHTML={{
+                    __html: title,
+                  }}
+                />
+              </a>
+            </Link>
+            {featuredImage && (
+              <CardImageSmall
+                {...featuredImage}
+                src={featuredImage.sourceUrl}
+                dangerouslySetInnerHTML={featuredImage.caption}
+              />
+            )}
+            <StyledMetadata {...metadata} />
+
+            {excerpt && (
+              <CardContent
                 dangerouslySetInnerHTML={{
-                  __html: title,
+                  __html: sanitizeExcerpt(excerpt),
                 }}
               />
-            </a>
-          </Link>
-          <StyledMetadata {...metadata} />
-          {excerpt && (
-            <CardContent
-              dangerouslySetInnerHTML={{
-                __html: sanitizeExcerpt(excerpt),
-              }}
+            )}
+          </Column>
+          {featuredImage && (
+            <CardImageLarge
+              {...featuredImage}
+              src={featuredImage.sourceUrl}
+              dangerouslySetInnerHTML={featuredImage.caption}
             />
           )}
         </PostCardStickyWrapper>
