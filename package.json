@@ -3,7 +3,7 @@
   "homepage": "https://stuteri-zander.netlify.app/",
   "version": "0.1.0",
   "license": "MIT",
-  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "author": "Alice Anglesjo <alice.anglesjo@hotmail.com>",
   "scripts": {
     "build": "next build && next export",
     "wpe-build": "npm run build",
