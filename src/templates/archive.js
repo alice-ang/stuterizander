@@ -14,7 +14,7 @@ import Pagination from 'components/Pagination/Pagination';
 import Grid from 'components/Grid.js/Grid';
 import styles from 'styles/templates/Archive.module.scss';
 import styled from 'styled-components';
-import Image from 'next/image';
+// import Image from 'next/image';
 const Card = styled.div({
   height: '100%',
   width: '100%',
@@ -87,23 +87,18 @@ export default function TemplateArchive({
               <Grid title={title}>
                 {posts.map((post) => {
                   const { featuredImage } = post;
-                  console.log(post.featuredImage.sourceUrl);
                   return (
                     <Card post={post} key={post.id}>
                       {/* <Link href={horsePathBySlug(horse.slug)} passHref>
                         <a>{title}</a>
                       </Link> */}
                       {featuredImage && (
-                        <Image
+                        <img
                           {...featuredImage}
-                          src="http://localhost:10003/wp-content/uploads/2022/01/IMG_1446-scaled.jpg"
-                          width="100%"
-                          height="100%"
-                          layout="responsive"
-                          objectFit="cover"
+                          src={featuredImage.sourceUrl}
+                          dangerouslySetInnerHTML={featuredImage.caption}
                         />
                       )}
-                      {console.log(post.featuredImage.sourceUrl)}
                     </Card>
                   );
                 })}
