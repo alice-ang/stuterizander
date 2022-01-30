@@ -8,7 +8,8 @@ import styled from 'styled-components';
 import { Breakpoints, theme } from 'styles';
 
 const PostCardWrapper = styled.div({
-  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
   padding: '1.2em',
   color: 'inherit',
   textAlign: 'left',
@@ -16,7 +17,9 @@ const PostCardWrapper = styled.div({
   backgroundColor: theme.brand.light,
   boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
   borderRadius: 4,
-
+  [Breakpoints.Medium]: {
+    flexDirection: 'row',
+  },
   '& > a': {
     display: 'block',
     color: 'inherit',
@@ -25,6 +28,7 @@ const PostCardWrapper = styled.div({
     '&:hover': {
       h3: {
         color: 'tomato',
+        textDecoration: 'none',
       },
     },
   },
@@ -33,7 +37,6 @@ const PostCardWrapper = styled.div({
 const PostCardStickyWrapper = styled.div({
   border: 'solid 0.02em grey',
   borderRadius: '1em',
-
   svg: {
     position: 'absolute',
     top: '1.2em',
@@ -44,13 +47,23 @@ const PostCardStickyWrapper = styled.div({
 
 const CardTitle = styled.h3({
   margin: 0,
+  color: theme.text.neutral,
 });
 
-const CardImage = styled.img({
-  float: 'right',
+const CardImageLarge = styled.img({
   padding: 0,
+  display: 'none',
   [Breakpoints.Medium]: {
+    display: 'block',
     padding: '0px 0px 10px 10px',
+  },
+});
+
+const CardImageSmall = styled.img({
+  padding: 0,
+  display: 'block',
+  [Breakpoints.Medium]: {
+    display: 'none',
   },
 });
 
@@ -69,9 +82,14 @@ const CardContent = styled.div({
 });
 
 const StyledMetadata = styled(Metadata)({
-  '* >li': {
+  '* > li': {
     margin: 0,
   },
+});
+
+const Column = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
 });
 
 const PostCard = ({ post, options = {} }) => {
@@ -116,28 +134,38 @@ const PostCard = ({ post, options = {} }) => {
         </PostCardStickyWrapper>
       ) : (
         <PostCardWrapper>
-          <Link href={postPathBySlug(slug)}>
-            <a>
-              <CardTitle
+          <Column>
+            <Link href={postPathBySlug(slug)}>
+              <a>
+                <CardTitle
+                  dangerouslySetInnerHTML={{
+                    __html: title,
+                  }}
+                />
+              </a>
+            </Link>
+            {featuredImage && (
+              <CardImageSmall
+                {...featuredImage}
+                src={featuredImage.sourceUrl}
+                dangerouslySetInnerHTML={featuredImage.caption}
+              />
+            )}
+            <StyledMetadata {...metadata} />
+
+            {excerpt && (
+              <CardContent
                 dangerouslySetInnerHTML={{
-                  __html: title,
+                  __html: sanitizeExcerpt(excerpt),
                 }}
               />
-            </a>
-          </Link>
+            )}
+          </Column>
           {featuredImage && (
-            <CardImage
+            <CardImageLarge
               {...featuredImage}
               src={featuredImage.sourceUrl}
               dangerouslySetInnerHTML={featuredImage.caption}
-            />
-          )}
-          <StyledMetadata {...metadata} />
-          {excerpt && (
-            <CardContent
-              dangerouslySetInnerHTML={{
-                __html: sanitizeExcerpt(excerpt),
-              }}
             />
           )}
         </PostCardWrapper>

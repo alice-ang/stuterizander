@@ -15,6 +15,8 @@ import Grid from 'components/Grid.js/Grid';
 import styles from 'styles/templates/Archive.module.scss';
 import styled from 'styled-components';
 // import Image from 'next/image';
+import Image from 'components/Image';
+
 const Card = styled.div({
   height: '100%',
   width: '100%',
@@ -93,7 +95,7 @@ export default function TemplateArchive({
                         <a>{title}</a>
                       </Link> */}
                       {featuredImage && (
-                        <img
+                        <Image
                           {...featuredImage}
                           src={featuredImage.sourceUrl}
                           dangerouslySetInnerHTML={featuredImage.caption}
