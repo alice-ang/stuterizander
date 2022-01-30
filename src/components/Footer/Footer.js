@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import useSite from 'hooks/use-site';
 import { postPathBySlug } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
-
+import { GrInstagram, GrFacebook, GrMail } from 'react-icons/gr';
 import { Breakpoints, theme } from 'styles';
 
 import Section from 'components/Section';
@@ -16,9 +16,11 @@ const FooterWrapper = styled.footer({
 });
 
 const FooterMenu = styled(Section)({
+  padding: 0,
   ul: {
     listStyle: 'none',
     padding: 0,
+    margin: 0,
   },
 
   [Breakpoints.Large]: {
@@ -36,6 +38,7 @@ const FooterMenuColumns = styled.ul({
   '& > li': {},
 
   [Breakpoints.Medium]: {
+    justifyContent: 'space-between',
     '& > li': {
       maxWidth: '15em',
       margin: '2em',
@@ -87,13 +90,54 @@ const FooterMenuItems = styled.ul({
 
 const Legal = styled(Section)({
   color: theme.text.light,
-  backgroundColor: theme.brand.alternate,
+  backgroundColor: theme.brand.complementary,
   padding: '0.8rem 0',
   margin: 0,
 
   p: {
     textAlign: 'center',
     margin: 0,
+  },
+});
+
+const ContactSection = styled(Section)({
+  display: 'flex',
+  flexWrap: 'wrap',
+  padding: 0,
+  justifyContent: 'flex-start',
+});
+
+const MapSection = styled.div({
+  width: '100%',
+  [Breakpoints.Medium]: {
+    width: '50%',
+  },
+  iframe: {
+    width: '100%',
+    height: '100%',
+    border: 0,
+  },
+});
+
+const Contact = styled.div({
+  textAlign: 'center',
+  height: 'fit-content',
+  padding: '0px 1em 1em 1em',
+  backgroundColor: theme.brand.alternate,
+  color: theme.text.light,
+
+  width: '100%',
+  [Breakpoints.Medium]: {
+    // height: 350,
+    width: '50%',
+  },
+
+  a: {
+    color: theme.text.light,
+    padding: '0px 1em',
+    '&:hover': {
+      color: 'tomato',
+    },
   },
 });
 
@@ -154,7 +198,7 @@ const Footer = () => {
             )}
             <li>
               <FooterMenuPTitle>
-                <strong>More</strong>
+                <strong>Övrigt</strong>
               </FooterMenuPTitle>
               <FooterMenuItems>
                 <li>
@@ -168,11 +212,42 @@ const Footer = () => {
           </FooterMenuColumns>
         </FooterMenu>
       )}
-
+      <ContactSection>
+        <Contact>
+          <h2>Kontakta Oss</h2>
+          <p>
+            Stefan & Annika driver Stuteri Zander sedan 2011. Ni är Varmt Välkomna på besök för att se våra hästar. Vi
+            finns i Össby utanför Finspång i Östergötlands län.
+          </p>
+          <p>Annika: 0702-189317 Stefan: 0734-427276</p>
+          <div>
+            <a href="https://www.facebook.com/Stuteri-Zander-819241218112011" target="_blank" rel="noreferrer">
+              <GrFacebook size={20} />
+            </a>
+            <a href="https://www.instagram.com/stuterizander/" target="_blank" rel="noreferrer">
+              <GrInstagram size={20} />
+            </a>
+            <a
+              href="mailto:annika.zander71@gmail.com"
+              target="_blank"
+              rel="noreferrer"
+              title="annika.zander71@gmail.com"
+            >
+              <GrMail size={20} />
+            </a>
+          </div>
+        </Contact>
+        <MapSection>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d66320.28908214375!2d15.708124772762108!3d58.70466935565554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46594fe916eff067%3A0x62323bd3cc41fbb1!2sNice!5e0!3m2!1ssv!2sse!4v1643479008122!5m2!1ssv!2sse"
+            loading="lazy"
+          ></iframe>
+        </MapSection>
+      </ContactSection>
       <Legal>
         <Container>
           <p>
-            &copy; {new Date().getFullYear()} {title} | Developed by Alice Anglesjö
+            &copy; {new Date().getFullYear()} {title} | Utvecklad av Alice Anglesjö
           </p>
         </Container>
       </Legal>

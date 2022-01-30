@@ -8,19 +8,46 @@ import Layout from 'components/Layout';
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
-import SectionTitle from 'components/SectionTitle';
-import PostCard from 'components/PostCard';
+// import SectionTitle from 'components/SectionTitle';
+// import PostCard from 'components/PostCard';
 import Pagination from 'components/Pagination/Pagination';
-
+import Grid from 'components/Grid.js/Grid';
 import styles from 'styles/templates/Archive.module.scss';
+import styled from 'styled-components';
+// import Image from 'next/image';
+import Image from 'components/Image';
 
-const DEFAULT_POST_OPTIONS = {};
+const Card = styled.div({
+  height: '100%',
+  width: '100%',
+  position: 'relative',
+  color: 'white',
+  boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+  h1: {
+    textAlign: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+      textDecoration: 'underline',
+    },
+  },
+  overflow: 'auto',
+  ul: {
+    padding: 0,
+    margin: 0,
+    li: {
+      display: 'inline-block',
+      padding: '0px 5px',
+    },
+  },
+});
+
+// const DEFAULT_POST_OPTIONS = {};
 
 export default function TemplateArchive({
   title = 'Archive',
   Title,
   posts,
-  postOptions = DEFAULT_POST_OPTIONS,
+  // postOptions = DEFAULT_POST_OPTIONS,
   slug,
   metadata,
   pagination,
@@ -57,8 +84,37 @@ export default function TemplateArchive({
 
       <Section>
         <Container>
-          <SectionTitle>Posts</SectionTitle>
           {Array.isArray(posts) && (
+            <>
+              <Grid title={title}>
+                {posts.map((post) => {
+                  const { featuredImage } = post;
+                  return (
+                    <Card post={post} key={post.id}>
+                      {/* <Link href={horsePathBySlug(horse.slug)} passHref>
+                        <a>{title}</a>
+                      </Link> */}
+                      {featuredImage && (
+                        <Image
+                          {...featuredImage}
+                          src={featuredImage.sourceUrl}
+                          dangerouslySetInnerHTML={featuredImage.caption}
+                        />
+                      )}
+                    </Card>
+                  );
+                })}
+              </Grid>
+              {pagination && (
+                <Pagination
+                  currentPage={pagination?.currentPage}
+                  pagesCount={pagination?.pagesCount}
+                  basePath={pagination?.basePath}
+                />
+              )}
+            </>
+          )}
+          {/* {Array.isArray(posts) && (
             <>
               <ul className={styles.posts}>
                 {posts.map((post) => {
@@ -77,7 +133,7 @@ export default function TemplateArchive({
                 />
               )}
             </>
-          )}
+          )} */}
         </Container>
       </Section>
     </Layout>
