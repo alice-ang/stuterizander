@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const ImageWrapper = styled.figure({
+  margin: 0,
   div: {
     overflow: 'hidden',
     margin: 0,
@@ -15,8 +16,7 @@ const ImageWrapper = styled.figure({
     },
   },
   img: {
-    border: 'none',
-    padding: 0,
+    objectFit: 'cover',
   },
   figcaption: {
     color: 'grey',
