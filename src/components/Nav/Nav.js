@@ -233,9 +233,6 @@ const MenuSectionMobile = styled.div({
         margin: 0,
         fontWeight: 'bold',
         color: theme.text.neutral,
-        // textDecoration: 'none',
-        // padding: '1em',
-        // pointerEvents: 'none',
       },
     },
   },
@@ -245,6 +242,9 @@ const MenuSectionMobile = styled.div({
   },
 });
 
+const Flex = styled.div({
+  display: 'flex',
+});
 const SEARCH_VISIBLE = 'visible';
 const SEARCH_HIDDEN = 'hidden';
 
@@ -386,54 +386,60 @@ const Nav = () => {
               })}
             </Menu>
           </MenuSectionDesktop>
-          <Search>
-            {searchVisibility === SEARCH_HIDDEN && (
-              <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
-                <span className="sr-only">Toggle Search</span>
-                <FaSearch color={theme.brand.light} />
-              </button>
-            )}
-            {searchVisibility === SEARCH_VISIBLE && (
-              <form ref={formRef} action="/search" data-search-is-active={!!query}>
-                <input
-                  type="search"
-                  name="q"
-                  value={query || ''}
-                  onChange={handleOnSearch}
-                  autoComplete="off"
-                  placeholder="Sök..."
-                  required
-                />
-                <SearchResults>
-                  {results.length > 0 && (
-                    <ul>
-                      {results.map(({ slug, title }, index) => {
-                        return (
-                          <li key={slug}>
-                            <Link tabIndex={index} href={postPathBySlug(slug)}>
-                              <a>{title}</a>
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                  {results.length === 0 && (
-                    <p>
-                      Sorry, not finding anything for <strong>{query}</strong>
-                    </p>
-                  )}
-                </SearchResults>
-              </form>
-            )}
-          </Search>
-          <span
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          >
-            {toggle ? <ImCross size={18} color={theme.text.light} /> : <MobileNav size={20} color={theme.text.light} />}
-          </span>
+          <Flex>
+            <Search>
+              {searchVisibility === SEARCH_HIDDEN && (
+                <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
+                  <span className="sr-only">Toggle Search</span>
+                  <FaSearch color={theme.brand.light} />
+                </button>
+              )}
+              {searchVisibility === SEARCH_VISIBLE && (
+                <form ref={formRef} action="/search" data-search-is-active={!!query}>
+                  <input
+                    type="search"
+                    name="q"
+                    value={query || ''}
+                    onChange={handleOnSearch}
+                    autoComplete="off"
+                    placeholder="Sök..."
+                    required
+                  />
+                  <SearchResults>
+                    {results.length > 0 && (
+                      <ul>
+                        {results.map(({ slug, title }, index) => {
+                          return (
+                            <li key={slug}>
+                              <Link tabIndex={index} href={postPathBySlug(slug)}>
+                                <a>{title}</a>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                    {results.length === 0 && (
+                      <p>
+                        Sorry, not finding anything for <strong>{query}</strong>
+                      </p>
+                    )}
+                  </SearchResults>
+                </form>
+              )}
+            </Search>
+            <span
+              onClick={() => {
+                setToggle(!toggle);
+              }}
+            >
+              {toggle ? (
+                <ImCross size={18} color={theme.text.light} />
+              ) : (
+                <MobileNav size={20} color={theme.text.light} />
+              )}
+            </span>
+          </Flex>
         </NavSection>
       </NavWrapper>
       {toggle && (

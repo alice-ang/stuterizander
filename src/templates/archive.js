@@ -10,9 +10,10 @@ import Container from 'components/Container';
 import Pagination from 'components/Pagination/Pagination';
 import Grid from 'components/Grid.js/Grid';
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
 const CardText = styled.div({
-  opacity: 0,
+  opacity: 1,
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -20,10 +21,14 @@ const CardText = styled.div({
   color: '#fff',
   zIndex: 4,
   transition: '.3s ease-in-out',
+
+  [Breakpoints.Medium]: {
+    opacity: 0,
+  },
 });
 
 const CardOverlay = styled.div({
-  opacity: 0,
+  opacity: 0.4,
   top: 1,
   width: '100%',
   height: '100%',
@@ -33,6 +38,9 @@ const CardOverlay = styled.div({
 
   zIndex: 3,
   display: 'block',
+  [Breakpoints.Medium]: {
+    opacity: 0,
+  },
 });
 
 const CardImage = styled.img({
@@ -47,11 +55,14 @@ const Card = styled.div({
   width: '100%',
   height: '100%',
   textAlign: 'center',
-  [`&:hover > ${CardText}`]: {
-    opacity: 1,
-  },
-  [`&:hover > ${CardOverlay}`]: {
-    opacity: 0.4,
+
+  [Breakpoints.Medium]: {
+    [`&:hover > ${CardText}`]: {
+      opacity: 1,
+    },
+    [`&:hover > ${CardOverlay}`]: {
+      opacity: 0.4,
+    },
   },
 });
 
