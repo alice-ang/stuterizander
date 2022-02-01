@@ -8,16 +8,19 @@ const GridTitle = styled.h2({
 
 const ProductGrid = styled.div({
   display: 'grid',
+  gridAutoRows: '120px 120px',
   gridTemplateColumns: `repeat(auto-fit, minmax(120px, 1fr))`,
   gridGap: '0.5em',
   margin: 0,
   borderRadius: 5,
-  [Breakpoints.Large]: {
-    gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))`,
+  [Breakpoints.Medium]: {
+    gridAutoRows: '200px 200px',
+    gridTemplateColumns: `repeat(auto-fill, minmax(200px, 1fr))`,
     gridGap: '1em',
   },
   [Breakpoints.XL]: {
-    gridTemplateColumns: `repeat(auto-fit, minmax(230px, 1fr))`,
+    gridAutoRows: '300px 300px',
+    gridTemplateColumns: `repeat(auto-fill, minmax(300px, 1fr))`,
   },
 });
 
