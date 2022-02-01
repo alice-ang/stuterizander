@@ -3,55 +3,65 @@ import { Helmet } from 'react-helmet';
 import { WebpageJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
 import useSite from 'hooks/use-site';
-
 import Layout from 'components/Layout';
-import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
-// import SectionTitle from 'components/SectionTitle';
-// import PostCard from 'components/PostCard';
+
 import Pagination from 'components/Pagination/Pagination';
 import Grid from 'components/Grid.js/Grid';
-import styles from 'styles/templates/Archive.module.scss';
 import styled from 'styled-components';
-// import Image from 'next/image';
-import Image from 'components/Image';
+
+const CardText = styled.div({
+  opacity: 0,
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%,-50%)',
+  color: '#fff',
+  zIndex: 4,
+  transition: '.3s ease-in-out',
+});
+
+const CardOverlay = styled.div({
+  opacity: 0,
+  top: 1,
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+  left: 0,
+  backgroundColor: '#000',
+
+  zIndex: 3,
+  display: 'block',
+});
+
+const CardImage = styled.img({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: '50% 50%',
+});
 
 const Card = styled.div({
-  height: '100%',
-  width: '100%',
   position: 'relative',
-  color: 'white',
-  boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-  h1: {
-    textAlign: 'center',
-    '&:hover': {
-      cursor: 'pointer',
-      textDecoration: 'underline',
-    },
+  width: '100%',
+  height: '100%',
+  textAlign: 'center',
+  [`&:hover > ${CardText}`]: {
+    opacity: 1,
   },
-  overflow: 'auto',
-  ul: {
-    padding: 0,
-    margin: 0,
-    li: {
-      display: 'inline-block',
-      padding: '0px 5px',
-    },
+  [`&:hover > ${CardOverlay}`]: {
+    opacity: 0.4,
   },
 });
 
-// const DEFAULT_POST_OPTIONS = {};
+const CardImageWrapper = styled.div({
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+});
 
-export default function TemplateArchive({
-  title = 'Archive',
-  Title,
-  posts,
-  // postOptions = DEFAULT_POST_OPTIONS,
-  slug,
-  metadata,
-  pagination,
-}) {
+export default function TemplateArchive({ title = 'Archive', posts, slug, metadata, pagination }) {
   const { metadata: siteMetadata = {} } = useSite();
 
   if (process.env.WORDPRESS_PLUGIN_SEO !== true) {
@@ -68,20 +78,6 @@ export default function TemplateArchive({
 
       <WebpageJsonLd title={title} description={metadata.description} siteTitle={siteMetadata.title} slug={slug} />
 
-      <Header>
-        <Container>
-          <h1>{Title || title}</h1>
-          {metadata.description && (
-            <p
-              className={styles.archiveDescription}
-              dangerouslySetInnerHTML={{
-                __html: metadata.description,
-              }}
-            />
-          )}
-        </Container>
-      </Header>
-
       <Section>
         <Container>
           {Array.isArray(posts) && (
@@ -90,18 +86,23 @@ export default function TemplateArchive({
                 {posts.map((post) => {
                   const { featuredImage } = post;
                   return (
-                    <Card post={post} key={post.id}>
-                      {/* <Link href={horsePathBySlug(horse.slug)} passHref>
-                        <a>{title}</a>
-                      </Link> */}
-                      {featuredImage && (
-                        <Image
-                          {...featuredImage}
-                          src={featuredImage.sourceUrl}
-                          dangerouslySetInnerHTML={featuredImage.caption}
-                        />
-                      )}
-                    </Card>
+                    <a href={`/posts/${post.slug}`} key={post.id}>
+                      <Card post={post}>
+                        <CardText>
+                          <h3>{post.title}</h3>
+                        </CardText>
+                        {featuredImage && (
+                          <CardImageWrapper>
+                            <CardImage
+                              {...featuredImage}
+                              src={featuredImage.sourceUrl}
+                              dangerouslySetInnerHTML={featuredImage.caption}
+                            />
+                          </CardImageWrapper>
+                        )}
+                        <CardOverlay />
+                      </Card>
+                    </a>
                   );
                 })}
               </Grid>
@@ -114,26 +115,6 @@ export default function TemplateArchive({
               )}
             </>
           )}
-          {/* {Array.isArray(posts) && (
-            <>
-              <ul className={styles.posts}>
-                {posts.map((post) => {
-                  return (
-                    <li key={post.slug}>
-                      <PostCard post={post} options={postOptions} />
-                    </li>
-                  );
-                })}
-              </ul>
-              {pagination && (
-                <Pagination
-                  currentPage={pagination?.currentPage}
-                  pagesCount={pagination?.pagesCount}
-                  basePath={pagination?.basePath}
-                />
-              )}
-            </>
-          )} */}
         </Container>
       </Section>
     </Layout>

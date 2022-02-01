@@ -10,12 +10,6 @@ const ContentWrapper = styled.div({
       marginBottom: 0,
     },
   },
-
-  img: {
-    height: 'auto',
-    display: 'block',
-    margin: ' 0 auto',
-  },
 });
 
 const Content = ({ children }) => {
