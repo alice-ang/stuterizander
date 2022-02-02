@@ -9,7 +9,6 @@ import Layout from 'components/Layout';
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
-import SectionTitle from 'components/SectionTitle';
 
 import styles from 'styles/pages/Categories.module.scss';
 
@@ -33,13 +32,12 @@ export default function Categories({ categories }) {
 
       <Header>
         <Container>
-          <h1>Categories</h1>
+          <h1>Kategorier</h1>
         </Container>
       </Header>
 
       <Section>
         <Container>
-          <SectionTitle>All Categories</SectionTitle>
           <ul className={styles.categories}>
             {categories.map((category) => {
               return (
