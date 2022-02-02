@@ -12,11 +12,11 @@ import Container from 'components/Container';
 const FooterWrapper = styled.footer({
   width: '100%',
   paddingTop: '1em',
-  backgroundColor: theme.brand.primary,
+  backgroundColor: theme.brand.dark,
 });
 
 const FooterMenu = styled(Section)({
-  padding: 0,
+  padding: '2em 0px',
   ul: {
     listStyle: 'none',
     padding: 0,
@@ -81,7 +81,6 @@ const FooterMenuItems = styled.ul({
     textDecoration: 'none',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-
     '&:hover': {
       color: 'tomato',
     },
@@ -128,7 +127,6 @@ const Contact = styled.div({
 
   width: '100%',
   [Breakpoints.Medium]: {
-    // height: 350,
     width: '50%',
   },
 
@@ -158,7 +156,7 @@ const Footer = () => {
               <li>
                 <Link href="/posts/" passHref>
                   <FooterMenuTitle>
-                    <strong>Recent Posts</strong>
+                    <strong>Senaste inlägg</strong>
                   </FooterMenuTitle>
                 </Link>
                 <FooterMenuItems>
@@ -179,7 +177,7 @@ const Footer = () => {
               <li>
                 <Link href="/categories/" passHref>
                   <FooterMenuTitle>
-                    <strong>Categories</strong>
+                    <strong>Kategorier</strong>
                   </FooterMenuTitle>
                 </Link>
                 <FooterMenuItems>

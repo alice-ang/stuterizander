@@ -42,7 +42,6 @@ const Name = styled.p({
       padding: '0.5em',
       marginLeft: '-0.5em',
     },
-
     '&:hover': {
       color: 'tomato',
     },
@@ -51,17 +50,27 @@ const Name = styled.p({
 
 const Search = styled.div({
   flexGrow: 0,
+  display: 'none',
 
   form: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     position: 'relative',
     height: '100%',
+    width: '50%',
 
-    [Breakpoints.Small]: {
-      justifyContent: 'flex-end',
-      width: '50%',
+    input: {
+      border: 'none',
+      width: '100vw',
+      borderRadius: 5,
+      [Breakpoints.Medium]: {
+        width: '70%',
+      },
+    },
+    [Breakpoints.Medium]: {
+      justifyContent: 'center',
+      width: '100%',
     },
   },
 
@@ -89,6 +98,10 @@ const Search = styled.div({
       },
     },
   },
+
+  [Breakpoints.Medium]: {
+    display: 'block',
+  },
 });
 
 const SearchResults = styled.div({
@@ -101,7 +114,6 @@ const SearchResults = styled.div({
   boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
   borderTop: `solid 5px ${theme.brand.alternate}`,
   zIndex: '999',
-
   '[data-search-is-active="true"] &': {
     display: 'block',
   },
@@ -121,7 +133,6 @@ const SearchResults = styled.div({
     display: 'block',
     color: 'grey',
     textDecoration: 'none',
-
     '&:hover': {
       color: 'tomato',
     },
@@ -138,7 +149,6 @@ const SubMenu = styled(NavListItem)({
 
   li: {
     margin: 0,
-
     a: {
       color: theme.text.light,
       padding: '0.3em',
@@ -236,15 +246,11 @@ const MenuSectionMobile = styled.div({
       },
     },
   },
-
   [Breakpoints.Medium]: {
     display: 'none',
   },
 });
 
-const Flex = styled.div({
-  display: 'flex',
-});
 const SEARCH_VISIBLE = 'visible';
 const SEARCH_HIDDEN = 'hidden';
 
@@ -386,65 +392,94 @@ const Nav = () => {
               })}
             </Menu>
           </MenuSectionDesktop>
-          <Flex>
-            <Search>
-              {searchVisibility === SEARCH_HIDDEN && (
-                <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
-                  <span className="sr-only">Toggle Search</span>
-                  <FaSearch color={theme.brand.light} />
-                </button>
-              )}
-              {searchVisibility === SEARCH_VISIBLE && (
-                <form ref={formRef} action="/search" data-search-is-active={!!query}>
-                  <input
-                    type="search"
-                    name="q"
-                    value={query || ''}
-                    onChange={handleOnSearch}
-                    autoComplete="off"
-                    placeholder="Sök..."
-                    required
-                  />
-                  <SearchResults>
-                    {results.length > 0 && (
-                      <ul>
-                        {results.map(({ slug, title }, index) => {
-                          return (
-                            <li key={slug}>
-                              <Link tabIndex={index} href={postPathBySlug(slug)}>
-                                <a>{title}</a>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                    {results.length === 0 && (
-                      <p>
-                        Sorry, not finding anything for <strong>{query}</strong>
-                      </p>
-                    )}
-                  </SearchResults>
-                </form>
-              )}
-            </Search>
-            <span
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-            >
-              {toggle ? (
-                <ImCross size={18} color={theme.text.light} />
-              ) : (
-                <MobileNav size={20} color={theme.text.light} />
-              )}
-            </span>
-          </Flex>
+
+          <Search>
+            {searchVisibility === SEARCH_HIDDEN && (
+              <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
+                <span className="sr-only">Toggle Search</span>
+                <FaSearch color={theme.brand.light} size={20} />
+              </button>
+            )}
+            {searchVisibility === SEARCH_VISIBLE && (
+              <form ref={formRef} action="/search" data-search-is-active={!!query}>
+                <input
+                  type="search"
+                  name="q"
+                  value={query || ''}
+                  onChange={handleOnSearch}
+                  autoComplete="off"
+                  placeholder="Sök..."
+                  required
+                />
+                <SearchResults>
+                  {results.length > 0 && (
+                    <ul>
+                      {results.map(({ slug, title }, index) => {
+                        return (
+                          <li key={slug}>
+                            <Link tabIndex={index} href={postPathBySlug(slug)}>
+                              <a>{title}</a>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                  {results.length === 0 && (
+                    <p>
+                      Sorry, not finding anything for <strong>{query}</strong>
+                    </p>
+                  )}
+                </SearchResults>
+              </form>
+            )}
+          </Search>
+          <span
+            onClick={() => {
+              setToggle(!toggle);
+            }}
+          >
+            {toggle ? <ImCross size={20} color={theme.text.light} /> : <MobileNav size={24} color={theme.text.light} />}
+          </span>
         </NavSection>
       </NavWrapper>
       {toggle && (
         <MenuSectionMobile>
           <Menu>
+            <li>
+              <form ref={formRef} action="/search" data-search-is-active={!!query}>
+                <input
+                  type="search"
+                  name="q"
+                  value={query || ''}
+                  onChange={handleOnSearch}
+                  autoComplete="off"
+                  placeholder="Sök..."
+                  required
+                />
+                <SearchResults>
+                  {results.length > 0 && (
+                    <ul>
+                      {results.map(({ slug, title }, index) => {
+                        return (
+                          <li key={slug}>
+                            <Link tabIndex={index} href={postPathBySlug(slug)}>
+                              <a>{title}</a>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                  {results.length === 0 && (
+                    <p>
+                      Sorry, not finding anything for <strong>{query}</strong>
+                    </p>
+                  )}
+                </SearchResults>
+              </form>
+            </li>
+
             {navigation?.map((listItem) => {
               return (
                 <span

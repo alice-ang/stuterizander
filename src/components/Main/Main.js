@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const MainWrapper = styled.main({
-  paddingTop: '2em',
+  padding: '2em 0px',
   backgroundColor: '#f7f7f7',
 });
 const Main = ({ children }) => {

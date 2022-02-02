@@ -116,18 +116,18 @@ export default function Post({ post, socialImage, relatedPosts }) {
 
       <Section className={styles.postFooter}>
         <Container>
-          <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
+          <p className={styles.postModified}>Senast uppdaterad {formatDate(modified)}.</p>
           {!!relatedPostsList.length && (
             <div className={styles.relatedPosts}>
               {relatedPostsTitle.name ? (
                 <span>
-                  More from{' '}
+                  Mer från{' '}
                   <Link href={relatedPostsTitle.link}>
                     <a>{relatedPostsTitle.name}</a>
                   </Link>
                 </span>
               ) : (
-                <span>More Posts</span>
+                <span>Fler inlägg</span>
               )}
               <ul>
                 {relatedPostsList.map((post) => (
