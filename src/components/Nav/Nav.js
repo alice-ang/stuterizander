@@ -107,6 +107,7 @@ const Search = styled.div({
 const SearchResults = styled.div({
   display: 'none',
   position: 'absolute',
+  width: '100%',
   top: '100%',
   right: 0,
   backgroundColor: 'white',

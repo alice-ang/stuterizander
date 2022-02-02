@@ -7,12 +7,12 @@ const HeaderWrapper = styled.header({
     margin: 0,
     lineHeight: 1.15,
     textAlign: 'center',
-
+    paddingBottom: '1em',
     a: {
-      color: 'tomato',
       textDecoration: 'none',
 
       ['&:hover,&:focus,&:active']: {
+        color: 'tomato',
         textDecoration: 'underline',
       },
     },

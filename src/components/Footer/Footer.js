@@ -41,7 +41,6 @@ const FooterMenuColumns = styled.ul({
     justifyContent: 'space-between',
     '& > li': {
       maxWidth: '15em',
-      margin: '2em',
     },
   },
 });
