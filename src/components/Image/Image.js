@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const ImageWrapper = styled.figure({
   margin: 0,
+  width: '100%',
+  height: '100%',
   div: {
     overflow: 'hidden',
     margin: 0,
@@ -16,7 +18,10 @@ const ImageWrapper = styled.figure({
     },
   },
   img: {
+    width: '100%',
+    height: '100%',
     objectFit: 'cover',
+    objectPosition: '50% 50%',
   },
   figcaption: {
     color: 'grey',
@@ -26,11 +31,11 @@ const ImageWrapper = styled.figure({
   },
 });
 
-const Image = ({ children, width = '100%', height = 'auto', src, alt, srcSet, dangerouslySetInnerHTML }) => {
+const Image = ({ children, src, alt, srcSet, dangerouslySetInnerHTML }) => {
   return (
     <ImageWrapper>
       <div>
-        <img width={width} height={height} src={src} alt={alt || ''} srcSet={srcSet} />
+        <img src={src} alt={alt || ''} srcSet={srcSet} />
       </div>
       {children && <figcaption>{children}</figcaption>}
       {dangerouslySetInnerHTML && (

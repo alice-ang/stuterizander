@@ -98,7 +98,7 @@ const Metadata = ({ author, date, categories, options = DEFAULT_METADATA_OPTIONS
                 alt="Author Avatar"
               />
             )}
-            By{' '}
+            Av{' '}
             <Link href={authorPathByName(author.name)}>
               <a rel="author">{author.name}</a>
             </Link>

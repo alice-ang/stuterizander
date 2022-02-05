@@ -12,7 +12,7 @@ import Container from 'components/Container';
 const FooterWrapper = styled.footer({
   width: '100%',
   paddingTop: '1em',
-  backgroundColor: theme.brand.dark,
+  backgroundColor: theme.brand.primary,
 });
 
 const FooterMenu = styled(Section)({
@@ -88,10 +88,9 @@ const FooterMenuItems = styled.ul({
 
 const Legal = styled(Section)({
   color: theme.text.light,
-  backgroundColor: theme.brand.complementary,
+  backgroundColor: theme.brand.dark,
   padding: '0.8rem 0',
   margin: 0,
-
   p: {
     textAlign: 'center',
     margin: 0,

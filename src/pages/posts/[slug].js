@@ -16,6 +16,7 @@ import Container from 'components/Container';
 import Content from 'components/Content';
 import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
+import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
 import styled from 'styled-components';
@@ -36,6 +37,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
     categories,
     modified,
     featuredImage,
+    images,
     isSticky = false,
   } = post;
 
@@ -111,6 +113,9 @@ export default function Post({ post, socialImage, relatedPosts }) {
               }}
             />
           </Container>
+        </Section>
+        <Section>
+          <Container>{images && <ImageGrid images={images} />}</Container>
         </Section>
       </Content>
 
