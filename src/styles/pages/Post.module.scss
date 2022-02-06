@@ -18,6 +18,9 @@
 .relatedPosts {
   display: flex;
   flex-direction: column;
+  a {
+    color: tomato;
+  }
   span {
     font-size: 1.2em;
     margin-bottom: 0.4em;

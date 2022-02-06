@@ -85,11 +85,12 @@ const Search = styled.div({
 const SearchResults = styled.div({
   display: 'none',
   position: 'absolute',
-  width: '100%',
   top: '100%',
   right: 0,
   backgroundColor: 'white',
-  padding: '1em',
+  padding: '1rem 1.5rem',
+  width: '100%',
+  borderRadius: '0.5rem',
   boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
   borderTop: `solid 5px ${theme.brand.alternate}`,
   zIndex: '999',
@@ -184,6 +185,11 @@ const Menu = styled.ul({
       },
       [`> ${SubMenu}`]: {
         display: 'block',
+      },
+    },
+    [`span > * > ul`]: {
+      a: {
+        color: 'red',
       },
     },
     [`& > ${SubMenu}`]: {
@@ -447,18 +453,6 @@ const Nav = () => {
       {toggle && (
         <MenuSectionMobile>
           <Menu>
-            {navigation?.map((listItem) => {
-              return (
-                <span
-                  key={listItem.id}
-                  onClick={() => {
-                    setToggle(!toggle);
-                  }}
-                >
-                  <SubMenu item={listItem} />
-                </span>
-              );
-            })}
             <li>
               <form ref={formRef} action="/search" data-search-is-active={!!query}>
                 <input
@@ -492,6 +486,18 @@ const Nav = () => {
                 </SearchResults>
               </form>
             </li>
+            {navigation?.map((listItem) => {
+              return (
+                <span
+                  key={listItem.id}
+                  onClick={() => {
+                    setToggle(!toggle);
+                  }}
+                >
+                  <SubMenu item={listItem} />
+                </span>
+              );
+            })}
           </Menu>
         </MenuSectionMobile>
       )}
