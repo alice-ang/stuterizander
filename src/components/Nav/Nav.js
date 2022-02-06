@@ -52,28 +52,6 @@ const Search = styled.div({
   flexGrow: 0,
   display: 'none',
 
-  form: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    position: 'relative',
-    height: '100%',
-    width: '50%',
-
-    input: {
-      border: 'none',
-      width: '100vw',
-      borderRadius: 5,
-      [Breakpoints.Medium]: {
-        width: '70%',
-      },
-    },
-    [Breakpoints.Medium]: {
-      justifyContent: 'center',
-      width: '100%',
-    },
-  },
-
   button: {
     background: 'none',
     border: 'none',
@@ -165,6 +143,28 @@ const Menu = styled.ul({
   padding: 0,
   margin: 0,
 
+  form: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'relative',
+    height: '100%',
+    width: '100vw',
+
+    input: {
+      border: 'none',
+      width: '100vw',
+      borderRadius: 5,
+      padding: '1em',
+      [Breakpoints.Medium]: {
+        width: '70%',
+      },
+    },
+    [Breakpoints.Medium]: {
+      justifyContent: 'center',
+      width: '70%',
+    },
+  },
   li: {
     position: 'relative',
     zIndex: 1,
@@ -447,6 +447,18 @@ const Nav = () => {
       {toggle && (
         <MenuSectionMobile>
           <Menu>
+            {navigation?.map((listItem) => {
+              return (
+                <span
+                  key={listItem.id}
+                  onClick={() => {
+                    setToggle(!toggle);
+                  }}
+                >
+                  <SubMenu item={listItem} />
+                </span>
+              );
+            })}
             <li>
               <form ref={formRef} action="/search" data-search-is-active={!!query}>
                 <input
@@ -480,19 +492,6 @@ const Nav = () => {
                 </SearchResults>
               </form>
             </li>
-
-            {navigation?.map((listItem) => {
-              return (
-                <span
-                  key={listItem.id}
-                  onClick={() => {
-                    setToggle(!toggle);
-                  }}
-                >
-                  <SubMenu item={listItem} />
-                </span>
-              );
-            })}
           </Menu>
         </MenuSectionMobile>
       )}

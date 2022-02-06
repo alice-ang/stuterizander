@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
@@ -16,6 +17,7 @@ import Container from 'components/Container';
 import Content from 'components/Content';
 import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
+import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
 import styled from 'styled-components';
@@ -36,8 +38,10 @@ export default function Post({ post, socialImage, relatedPosts }) {
     categories,
     modified,
     featuredImage,
+    images,
     isSticky = false,
   } = post;
+  const [filteredImages, setFilteredImages] = useState(null);
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
 
@@ -71,6 +75,10 @@ export default function Post({ post, socialImage, relatedPosts }) {
   const { posts: relatedPostsList, title: relatedPostsTitle } = relatedPosts;
 
   const helmetSettings = helmetSettingsFromMetadata(metadata);
+
+  useEffect(() => {
+    setFilteredImages(Object.values(images).filter((image) => image !== 'Post_Images' && image !== null));
+  }, [images, setFilteredImages]);
 
   return (
     <Layout>
@@ -112,6 +120,13 @@ export default function Post({ post, socialImage, relatedPosts }) {
             />
           </Container>
         </Section>
+        {filteredImages && filteredImages.length > 0 && (
+          <Section>
+            <Container>
+              <ImageGrid images={filteredImages} />
+            </Container>
+          </Section>
+        )}
       </Content>
 
       <Section className={styles.postFooter}>

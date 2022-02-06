@@ -18,6 +18,17 @@ export const QUERY_ALL_POSTS = gql`
             }
           }
           id
+          images {
+            image1 {
+              sourceUrl
+            }
+            image2 {
+              sourceUrl
+            }
+            image3 {
+              sourceUrl
+            }
+          }
           categories {
             edges {
               node {
@@ -68,6 +79,17 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       id
+      images {
+        image1 {
+          sourceUrl
+        }
+        image2 {
+          sourceUrl
+        }
+        image3 {
+          sourceUrl
+        }
+      }
       categories {
         edges {
           node {
@@ -118,6 +140,17 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             }
           }
           id
+          images {
+            image1 {
+              sourceUrl
+            }
+            image2 {
+              sourceUrl
+            }
+            image3 {
+              sourceUrl
+            }
+          }
           categories {
             edges {
               node {
@@ -157,6 +190,17 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     posts(where: { authorName: $slug, hasPassword: false }) {
       edges {
         node {
+          images {
+            image1 {
+              sourceUrl
+            }
+            image2 {
+              sourceUrl
+            }
+            image3 {
+              sourceUrl
+            }
+          }
           categories {
             edges {
               node {
