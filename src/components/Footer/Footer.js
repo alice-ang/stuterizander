@@ -22,7 +22,9 @@ const FooterMenu = styled(Section)({
     padding: 0,
     margin: 0,
   },
-
+  [Breakpoints.Medium]: {
+    padding: '2em',
+  },
   [Breakpoints.Large]: {
     maxWidth: '60%',
     margin: '0 auto',

@@ -6,9 +6,11 @@ import Image from 'components/Image';
 const MainImage = styled.div`
   grid-area: main;
   cursor: default;
+  align-self: baseline;
 `;
 const ImageContainer = styled.div`
   display: grid;
+  align-items: end;
   grid-gap: 0.3rem;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -25,7 +27,7 @@ const ImageContainer = styled.div`
 `;
 
 const ImageGrid = ({ images }) => {
-  const [mainUrl, setMainUrl] = useState(Object.values(images)[1].sourceUrl);
+  const [mainUrl, setMainUrl] = useState(images[0].sourceUrl);
 
   return (
     <ImageContainer>
@@ -33,21 +35,19 @@ const ImageGrid = ({ images }) => {
         <Image {...Object.values(images)[0]} src={mainUrl} dangerouslySetInnerHTML={Object.values(images)[0].caption} />
       </MainImage>
 
-      {Object.values(images).map((image) => {
-        if (!image.sourceUrl) {
-          return null;
-        }
-        return (
-          <span
-            key={image.sourceUrl}
-            onClick={() => {
-              setMainUrl(image.sourceUrl);
-            }}
-          >
-            <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} />
-          </span>
-        );
-      })}
+      {images &&
+        Object.values(images).map((image) => {
+          return (
+            <span
+              key={image.sourceUrl}
+              onClick={() => {
+                setMainUrl(image.sourceUrl);
+              }}
+            >
+              <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} />
+            </span>
+          );
+        })}
     </ImageContainer>
   );
 };
