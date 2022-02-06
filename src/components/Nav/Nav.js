@@ -77,7 +77,7 @@ const Search = styled.div({
     },
   },
 
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     display: 'block',
   },
 });
@@ -89,6 +89,7 @@ const SearchResults = styled.div({
   right: 0,
   backgroundColor: 'white',
   padding: '1rem 1.5rem',
+  fontSize: '1.2em',
   width: '100%',
   borderRadius: '0.5rem',
   boxShadow: '0 0px 8px 0 rgba(0,0,0,0.2)',
@@ -107,6 +108,9 @@ const SearchResults = styled.div({
     listStyle: 'none',
     padding: 0,
     margin: ' -0.5em 0',
+    li: {
+      padding: '0.5em',
+    },
   },
 
   a: {
@@ -116,6 +120,11 @@ const SearchResults = styled.div({
     '&:hover': {
       color: 'tomato',
     },
+  },
+  [Breakpoints.Large]: {
+    top: '10%',
+    width: '50%',
+    transform: 'translateX(-50%)',
   },
 });
 
@@ -157,11 +166,11 @@ const Menu = styled.ul({
       width: '100vw',
       borderRadius: 5,
       padding: '1em',
-      [Breakpoints.Medium]: {
+      [Breakpoints.Large]: {
         width: '70%',
       },
     },
-    [Breakpoints.Medium]: {
+    [Breakpoints.Large]: {
       justifyContent: 'center',
       width: '70%',
     },
@@ -216,7 +225,7 @@ const Menu = styled.ul({
 
 const MobileNav = styled(GiHamburgerMenu)({
   display: 'block',
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     display: 'none',
   },
 });
@@ -224,7 +233,7 @@ const MobileNav = styled(GiHamburgerMenu)({
 const MenuSectionDesktop = styled.div({
   display: 'none',
   flexDirection: 'row',
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     display: 'flex',
     flexDirection: 'row',
   },
@@ -253,7 +262,7 @@ const MenuSectionMobile = styled.div({
       },
     },
   },
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     display: 'none',
   },
 });
@@ -453,6 +462,18 @@ const Nav = () => {
       {toggle && (
         <MenuSectionMobile>
           <Menu>
+            {navigation?.map((listItem) => {
+              return (
+                <span
+                  key={listItem.id}
+                  onClick={() => {
+                    setToggle(!toggle);
+                  }}
+                >
+                  <SubMenu item={listItem} />
+                </span>
+              );
+            })}
             <li>
               <form ref={formRef} action="/search" data-search-is-active={!!query}>
                 <input
@@ -486,18 +507,6 @@ const Nav = () => {
                 </SearchResults>
               </form>
             </li>
-            {navigation?.map((listItem) => {
-              return (
-                <span
-                  key={listItem.id}
-                  onClick={() => {
-                    setToggle(!toggle);
-                  }}
-                >
-                  <SubMenu item={listItem} />
-                </span>
-              );
-            })}
           </Menu>
         </MenuSectionMobile>
       )}

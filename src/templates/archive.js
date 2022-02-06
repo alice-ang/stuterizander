@@ -22,7 +22,7 @@ const CardText = styled.div({
   zIndex: 4,
   transition: '.3s ease-in-out',
 
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     opacity: 0,
   },
 });
@@ -38,7 +38,7 @@ const CardOverlay = styled.div({
 
   zIndex: 3,
   display: 'block',
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     opacity: 0,
   },
 });
@@ -56,7 +56,7 @@ const Card = styled.div({
   height: '100%',
   textAlign: 'center',
 
-  [Breakpoints.Medium]: {
+  [Breakpoints.Large]: {
     [`&:hover > ${CardText}`]: {
       opacity: 1,
     },
