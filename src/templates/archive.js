@@ -104,11 +104,7 @@ export default function TemplateArchive({ title = 'Archive', posts, slug, metada
                         </CardText>
                         {featuredImage && (
                           <CardImageWrapper>
-                            <CardImage
-                              {...featuredImage}
-                              src={featuredImage.sourceUrl}
-                              dangerouslySetInnerHTML={featuredImage.caption}
-                            />
+                            <CardImage {...featuredImage} src={featuredImage.sourceUrl} />
                           </CardImageWrapper>
                         )}
                         <CardOverlay />

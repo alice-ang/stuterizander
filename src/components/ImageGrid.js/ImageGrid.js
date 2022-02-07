@@ -13,7 +13,7 @@ const ImageContainer = styled.div`
   align-items: end;
   grid-gap: 0.3rem;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
   grid-template-areas:
     '. . .'
     'main main main'
