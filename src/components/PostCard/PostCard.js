@@ -123,13 +123,7 @@ const PostCard = ({ post, options = {} }) => {
                 />
               </a>
             </Link>
-            {featuredImage && (
-              <CardImageSmall
-                {...featuredImage}
-                src={featuredImage.sourceUrl}
-                dangerouslySetInnerHTML={featuredImage.caption}
-              />
-            )}
+            {featuredImage && <CardImageSmall {...featuredImage} src={featuredImage.sourceUrl} />}
             <StyledMetadata {...metadata} />
 
             {excerpt && (
@@ -140,13 +134,7 @@ const PostCard = ({ post, options = {} }) => {
               />
             )}
           </Column>
-          {featuredImage && (
-            <CardImageLarge
-              {...featuredImage}
-              src={featuredImage.sourceUrl}
-              dangerouslySetInnerHTML={featuredImage.caption}
-            />
-          )}
+          {featuredImage && <CardImageLarge {...featuredImage} src={featuredImage.sourceUrl} />}
         </PostCardStickyWrapper>
       ) : (
         <PostCardWrapper>
@@ -160,13 +148,7 @@ const PostCard = ({ post, options = {} }) => {
                 />
               </a>
             </Link>
-            {featuredImage && (
-              <CardImageSmall
-                {...featuredImage}
-                src={featuredImage.sourceUrl}
-                dangerouslySetInnerHTML={featuredImage.caption}
-              />
-            )}
+            {featuredImage && <CardImageSmall {...featuredImage} src={featuredImage.sourceUrl} />}
             <StyledMetadata {...metadata} />
 
             {excerpt && (
@@ -177,13 +159,7 @@ const PostCard = ({ post, options = {} }) => {
               />
             )}
           </Column>
-          {featuredImage && (
-            <CardImageLarge
-              {...featuredImage}
-              src={featuredImage.sourceUrl}
-              dangerouslySetInnerHTML={featuredImage.caption}
-            />
-          )}
+          {featuredImage && <CardImageLarge {...featuredImage} src={featuredImage.sourceUrl} />}
         </PostCardWrapper>
       )}
     </>

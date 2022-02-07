@@ -383,6 +383,52 @@ const Nav = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const renderSearch = () => {
+    return (
+      <Search>
+        {searchVisibility === SEARCH_HIDDEN && (
+          <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
+            <span className="sr-only">Toggle Search</span>
+            <FaSearch color={theme.brand.light} size={20} />
+          </button>
+        )}
+        {searchVisibility === SEARCH_VISIBLE && (
+          <form ref={formRef} action="/search" data-search-is-active={!!query}>
+            <input
+              type="search"
+              name="q"
+              value={query || ''}
+              onChange={handleOnSearch}
+              autoComplete="off"
+              placeholder="Sök..."
+              required
+            />
+            <SearchResults>
+              {results.length > 0 && (
+                <ul>
+                  {results.map(({ slug, title }, index) => {
+                    return (
+                      <li key={slug}>
+                        <Link tabIndex={index} href={postPathBySlug(slug)}>
+                          <a>{title}</a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {results.length === 0 && (
+                <p>
+                  Sorry, not finding anything for <strong>{query}</strong>
+                </p>
+              )}
+            </SearchResults>
+          </form>
+        )}
+      </Search>
+    );
+  };
+
   useEffect(() => {
     document.addEventListener('keydown', escFunction, false);
 
@@ -409,47 +455,7 @@ const Nav = () => {
             </Menu>
           </MenuSectionDesktop>
 
-          <Search>
-            {searchVisibility === SEARCH_HIDDEN && (
-              <button onClick={handleOnToggleSearch} disabled={!searchIsLoaded}>
-                <span className="sr-only">Toggle Search</span>
-                <FaSearch color={theme.brand.light} size={20} />
-              </button>
-            )}
-            {searchVisibility === SEARCH_VISIBLE && (
-              <form ref={formRef} action="/search" data-search-is-active={!!query}>
-                <input
-                  type="search"
-                  name="q"
-                  value={query || ''}
-                  onChange={handleOnSearch}
-                  autoComplete="off"
-                  placeholder="Sök..."
-                  required
-                />
-                <SearchResults>
-                  {results.length > 0 && (
-                    <ul>
-                      {results.map(({ slug, title }, index) => {
-                        return (
-                          <li key={slug}>
-                            <Link tabIndex={index} href={postPathBySlug(slug)}>
-                              <a>{title}</a>
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                  {results.length === 0 && (
-                    <p>
-                      Sorry, not finding anything for <strong>{query}</strong>
-                    </p>
-                  )}
-                </SearchResults>
-              </form>
-            )}
-          </Search>
+          {renderSearch()}
           <span
             onClick={() => {
               setToggle(!toggle);
@@ -474,39 +480,7 @@ const Nav = () => {
                 </span>
               );
             })}
-            <li>
-              <form ref={formRef} action="/search" data-search-is-active={!!query}>
-                <input
-                  type="search"
-                  name="q"
-                  value={query || ''}
-                  onChange={handleOnSearch}
-                  autoComplete="off"
-                  placeholder="Sök..."
-                  required
-                />
-                <SearchResults>
-                  {results.length > 0 && (
-                    <ul>
-                      {results.map(({ slug, title }, index) => {
-                        return (
-                          <li key={slug}>
-                            <Link tabIndex={index} href={postPathBySlug(slug)}>
-                              <a>{title}</a>
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                  {results.length === 0 && (
-                    <p>
-                      Sorry, not finding anything for <strong>{query}</strong>
-                    </p>
-                  )}
-                </SearchResults>
-              </form>
-            </li>
+            <li></li>
           </Menu>
         </MenuSectionMobile>
       )}
