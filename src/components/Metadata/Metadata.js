@@ -39,7 +39,6 @@ const Meta = styled.ul({
 
     '&:hover': {
       color: 'tomato',
-      textDecoration: 'underline',
     },
   },
 });
