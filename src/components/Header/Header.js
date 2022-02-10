@@ -7,7 +7,6 @@ const HeaderWrapper = styled.header({
     margin: 0,
     lineHeight: 1.15,
     textAlign: 'center',
-    paddingBottom: '1em',
     a: {
       textDecoration: 'none',
 

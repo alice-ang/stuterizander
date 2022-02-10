@@ -48,6 +48,7 @@ const CardImageLarge = styled.img({
   [Breakpoints.Medium]: {
     display: 'block',
     padding: '0px 0px 10px 10px',
+    objectFit: 'cover',
   },
 });
 
@@ -61,7 +62,7 @@ const CardImageSmall = styled.img({
 
 const CardContent = styled.div({
   margin: 0,
-
+  color: theme.text.neutral,
   p: {
     '&:first-child': {
       marginTop: 0,
@@ -137,30 +138,29 @@ const PostCard = ({ post, options = {} }) => {
           {featuredImage && <CardImageLarge {...featuredImage} src={featuredImage.sourceUrl} />}
         </PostCardStickyWrapper>
       ) : (
-        <PostCardWrapper>
-          <Column>
-            <Link href={postPathBySlug(slug)}>
-              <a>
-                <CardTitle
-                  dangerouslySetInnerHTML={{
-                    __html: title,
-                  }}
-                />
-              </a>
-            </Link>
-            {featuredImage && <CardImageSmall {...featuredImage} src={featuredImage.sourceUrl} />}
-            <StyledMetadata {...metadata} />
-
-            {excerpt && (
-              <CardContent
+        <a href={postPathBySlug(slug)}>
+          <PostCardWrapper>
+            <Column>
+              <CardTitle
                 dangerouslySetInnerHTML={{
-                  __html: sanitizeExcerpt(excerpt),
+                  __html: title,
                 }}
               />
-            )}
-          </Column>
-          {featuredImage && <CardImageLarge {...featuredImage} src={featuredImage.sourceUrl} />}
-        </PostCardWrapper>
+
+              {featuredImage && <CardImageSmall {...featuredImage} src={featuredImage.sourceUrl} />}
+              <StyledMetadata {...metadata} />
+
+              {excerpt && (
+                <CardContent
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeExcerpt(excerpt),
+                  }}
+                />
+              )}
+            </Column>
+            {featuredImage && <CardImageLarge {...featuredImage} src={featuredImage.sourceUrl} />}
+          </PostCardWrapper>
+        </a>
       )}
     </>
   );
