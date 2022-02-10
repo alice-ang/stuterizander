@@ -21,10 +21,6 @@ const CardText = styled.div({
   color: '#fff',
   zIndex: 4,
   transition: '.3s ease-in-out',
-
-  [Breakpoints.Large]: {
-    opacity: 0,
-  },
 });
 
 const CardOverlay = styled.div({
@@ -38,9 +34,6 @@ const CardOverlay = styled.div({
 
   zIndex: 3,
   display: 'block',
-  [Breakpoints.Large]: {
-    opacity: 0,
-  },
 });
 
 const CardImage = styled.img({
@@ -58,10 +51,10 @@ const Card = styled.div({
 
   [Breakpoints.Large]: {
     [`&:hover > ${CardText}`]: {
-      opacity: 1,
+      opacity: 0,
     },
     [`&:hover > ${CardOverlay}`]: {
-      opacity: 0.4,
+      opacity: 0,
     },
   },
 });
