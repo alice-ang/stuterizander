@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import useSite from 'hooks/use-site';
-import { postPathBySlug } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
 import { GrInstagram, GrFacebook, GrMail } from 'react-icons/gr';
 import { Breakpoints, theme } from 'styles';
@@ -152,7 +151,7 @@ const Footer = () => {
       {hasMenu && (
         <FooterMenu>
           <FooterMenuColumns>
-            {hasRecentPosts && (
+            {/* {hasRecentPosts && (
               <li>
                 <Link href="/posts/" passHref>
                   <FooterMenuTitle>
@@ -172,7 +171,7 @@ const Footer = () => {
                   })}
                 </FooterMenuItems>
               </li>
-            )}
+            )} */}
             {hasRecentCategories && (
               <li>
                 <Link href="/categories/" passHref>
