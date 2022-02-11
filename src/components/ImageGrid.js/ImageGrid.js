@@ -44,7 +44,7 @@ const ImageGrid = ({ images }) => {
                 setMainUrl(image.sourceUrl);
               }}
             >
-              <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} />
+              <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} alt="bildgalleri" />
             </span>
           );
         })}

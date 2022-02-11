@@ -15,32 +15,13 @@ import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
 import Content from 'components/Content';
-import Metadata from 'components/Metadata';
 import FeaturedImage from 'components/FeaturedImage';
 import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
-import styled from 'styled-components';
-
-const StyledMetadata = styled(Metadata)({
-  textAlign: 'center',
-  justifyContent: 'center',
-});
 
 export default function Post({ post, socialImage, relatedPosts }) {
-  const {
-    title,
-    metaTitle,
-    description,
-    content,
-    date,
-    author,
-    categories,
-    modified,
-    featuredImage,
-    images,
-    isSticky = false,
-  } = post;
+  const { title, metaTitle, description, content, modified, featuredImage, images } = post;
   const [filteredImages, setFilteredImages] = useState(null);
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
@@ -67,10 +48,6 @@ export default function Post({ post, socialImage, relatedPosts }) {
     metadata.og.title = metadata.title;
     metadata.twitter.title = metadata.title;
   }
-
-  const metadataOptions = {
-    compactCategories: false,
-  };
 
   const { posts: relatedPostsList, title: relatedPostsTitle } = relatedPosts;
 
@@ -99,13 +76,6 @@ export default function Post({ post, socialImage, relatedPosts }) {
           dangerouslySetInnerHTML={{
             __html: title,
           }}
-        />
-        <StyledMetadata
-          date={date}
-          author={author}
-          categories={categories}
-          options={metadataOptions}
-          isSticky={isSticky}
         />
       </Header>
 

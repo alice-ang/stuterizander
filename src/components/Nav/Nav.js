@@ -443,7 +443,7 @@ const Nav = () => {
       <NavWrapper>
         <NavSection>
           <Name>
-            <Link href="/">
+            <Link href="/valkommen">
               <a>{title}</a>
             </Link>
           </Name>

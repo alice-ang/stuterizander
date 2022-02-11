@@ -12,7 +12,6 @@ import Header from 'components/Header';
 import Content from 'components/Content';
 import Section from 'components/Section';
 import Container from 'components/Container';
-import FeaturedImage from 'components/FeaturedImage';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Hero from 'components/Hero';
 import styles from 'styles/pages/Page.module.scss';
@@ -55,23 +54,16 @@ export default function Page({ page, breadcrumbs }) {
       <Header>
         {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         {featuredImage && (
-          <FeaturedImage
-            {...featuredImage}
-            src={featuredImage.sourceUrl}
-            dangerouslySetInnerHTML={featuredImage.caption}
-          />
+          <Hero image={featuredImage}>
+            <h2>{hero.heroText ?? title}</h2>
+            <h5>{hero.heroSubtitle ?? null}</h5>
+          </Hero>
         )}
       </Header>
 
       <Content>
         <Section>
           <Container>
-            {hero.heroImage && (
-              <Hero image={hero.heroImage}>
-                <h2>{hero.heroText}</h2>
-                <p>{hero.heroSubtitle}</p>
-              </Hero>
-            )}
             <div
               className={styles.content}
               dangerouslySetInnerHTML={{

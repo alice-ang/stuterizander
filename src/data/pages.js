@@ -22,13 +22,6 @@ export const QUERY_ALL_PAGES = gql`
             fieldGroupName
             heroSubtitle
             heroText
-            heroImage {
-              altText
-              sourceUrl
-              srcSet
-              srcSet
-              sizes
-            }
           }
           content
           featuredImage {
@@ -82,13 +75,6 @@ export const QUERY_PAGE_BY_URI = gql`
         fieldGroupName
         heroSubtitle
         heroText
-        heroImage {
-          altText
-          sourceUrl
-          srcSet
-          srcSet
-          sizes
-        }
       }
       content
       featuredImage {
