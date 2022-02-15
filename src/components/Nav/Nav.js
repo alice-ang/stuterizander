@@ -43,7 +43,7 @@ const Name = styled.p({
       marginLeft: '-0.5em',
     },
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
 });
@@ -72,7 +72,7 @@ const Search = styled.div({
 
     '&:focus': {
       svg: {
-        fill: 'tomato',
+        fill: theme.brand.link,
       },
     },
   },
@@ -118,7 +118,7 @@ const SearchResults = styled.div({
     color: 'grey',
     textDecoration: 'none',
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
   [Breakpoints.Large]: {
@@ -190,7 +190,7 @@ const Menu = styled.ul({
 
     '&:hover': {
       ' & > a': {
-        color: 'tomato',
+        color: theme.brand.link,
       },
       [`> ${SubMenu}`]: {
         display: 'block',
@@ -218,7 +218,7 @@ const Menu = styled.ul({
     color: theme.text.light,
     padding: '0.5em',
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
 });

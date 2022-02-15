@@ -1,6 +1,7 @@
 import Container from 'components/Container';
 
 import styled from 'styled-components';
+import { theme } from 'styles';
 
 const HeaderWrapper = styled.header({
   h1: {
@@ -11,7 +12,7 @@ const HeaderWrapper = styled.header({
       textDecoration: 'none',
 
       ['&:hover,&:focus,&:active']: {
-        color: 'tomato',
+        color: theme.brand.link,
         textDecoration: 'underline',
       },
     },

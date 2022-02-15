@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { theme } from '../../styles';
 
 const Crumbs = styled.ul({
   display: 'flex',
@@ -26,7 +27,7 @@ const Crumbs = styled.ul({
     textDecoration: 'none',
 
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
       textDecoration: 'underline',
     },
   },

@@ -38,7 +38,7 @@ const CardTitle = styled.h3({
   margin: 0,
   color: theme.text.neutral,
   '&:hover': {
-    color: 'tomato',
+    color: theme.brand.link,
   },
 });
 
@@ -111,7 +111,7 @@ const PostCard = ({ post, options = {} }) => {
         <PostCardStickyWrapper>
           {isSticky && (
             <div>
-              <FaMapPin aria-label="Sticky Post" color="tomato" size={20} />
+              <FaMapPin aria-label="Sticky Post" color={theme.brand.link} size={20} />
             </div>
           )}
           <Column>

@@ -5,6 +5,7 @@ import { authorPathByName } from 'lib/users';
 import { formatDate } from 'lib/datetime';
 import styled from 'styled-components';
 import { FaMapPin } from 'react-icons/fa';
+import { theme } from '../../styles';
 
 const DEFAULT_METADATA_OPTIONS = {
   compactCategories: true,
@@ -38,7 +39,7 @@ const Meta = styled.ul({
     textDecoration: 'none',
 
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
 });
