@@ -3,11 +3,20 @@ import styled from 'styled-components';
 import { Breakpoints } from '../../styles';
 import Image from 'components/Image';
 
+const GridWrapper = styled.div({
+  maxWidth: '100%',
+  margin: '0 auto',
+  [Breakpoints.Large]: {
+    maxWidth: '50%',
+  },
+});
+
 const MainImage = styled.div`
   grid-area: main;
   cursor: default;
   align-self: baseline;
 `;
+
 const ImageContainer = styled.div`
   display: grid;
   align-items: end;
@@ -19,36 +28,38 @@ const ImageContainer = styled.div`
     'main main main'
     'main main main'
     'main main main';
-
   cursor: pointer;
-  ${Breakpoints.Large}: {
-    grid-gap: 1rem;
-  }
 `;
 
 const ImageGrid = ({ images }) => {
   const [mainUrl, setMainUrl] = useState(images[0].sourceUrl);
 
   return (
-    <ImageContainer>
-      <MainImage>
-        <Image {...Object.values(images)[0]} src={mainUrl} dangerouslySetInnerHTML={Object.values(images)[0].caption} />
-      </MainImage>
+    <GridWrapper>
+      <ImageContainer>
+        <MainImage>
+          <Image
+            {...Object.values(images)[0]}
+            src={mainUrl}
+            dangerouslySetInnerHTML={Object.values(images)[0].caption}
+          />
+        </MainImage>
 
-      {images &&
-        Object.values(images).map((image) => {
-          return (
-            <span
-              key={image.sourceUrl}
-              onClick={() => {
-                setMainUrl(image.sourceUrl);
-              }}
-            >
-              <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} alt="bildgalleri" />
-            </span>
-          );
-        })}
-    </ImageContainer>
+        {images &&
+          Object.values(images).map((image) => {
+            return (
+              <span
+                key={image.sourceUrl}
+                onClick={() => {
+                  setMainUrl(image.sourceUrl);
+                }}
+              >
+                <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} alt="bildgalleri" />
+              </span>
+            );
+          })}
+      </ImageContainer>
+    </GridWrapper>
   );
 };
 export default ImageGrid;
