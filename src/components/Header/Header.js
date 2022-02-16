@@ -32,9 +32,9 @@ const HeaderWrapper = styled.header({
   },
 });
 
-const Header = ({ children }) => {
+const Header = ({ className, children }) => {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className={className}>
       <Container>{children}</Container>
     </HeaderWrapper>
   );

@@ -18,6 +18,9 @@ export const QUERY_ALL_POSTS = gql`
             }
           }
           id
+          isSold {
+            sold
+          }
           images {
             image1 {
               sourceUrl
@@ -79,6 +82,9 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       id
+      isSold {
+        sold
+      }
       images {
         image1 {
           sourceUrl
@@ -140,6 +146,9 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             }
           }
           id
+          isSold {
+            sold
+          }
           images {
             image1 {
               sourceUrl
@@ -190,6 +199,9 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     posts(where: { authorName: $slug, hasPassword: false }) {
       edges {
         node {
+          isSold {
+            sold
+          }
           images {
             image1 {
               sourceUrl

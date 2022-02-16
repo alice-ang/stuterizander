@@ -19,9 +19,18 @@ import FeaturedImage from 'components/FeaturedImage';
 import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
+import styled from 'styled-components';
+
+const StyledHeader = styled(Header)({
+  display: 'flex',
+});
+
+const Sold = styled.h3({
+  color: 'red',
+});
 
 export default function Post({ post, socialImage, relatedPosts }) {
-  const { title, metaTitle, description, content, modified, featuredImage, images } = post;
+  const { title, metaTitle, description, content, modified, featuredImage, images, isSold } = post;
   const [filteredImages, setFilteredImages] = useState(null);
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
@@ -63,7 +72,8 @@ export default function Post({ post, socialImage, relatedPosts }) {
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
-      <Header>
+      <StyledHeader>
+        {isSold.sold && <Sold>Såld</Sold>}
         {featuredImage && (
           <FeaturedImage
             {...featuredImage}
@@ -77,7 +87,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
             __html: title,
           }}
         />
-      </Header>
+      </StyledHeader>
 
       <Content>
         <Section>
