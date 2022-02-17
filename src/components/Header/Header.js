@@ -5,7 +5,6 @@ import { theme } from 'styles';
 
 const HeaderWrapper = styled.header({
   h1: {
-    margin: 0,
     lineHeight: 1.15,
     textAlign: 'center',
     a: {

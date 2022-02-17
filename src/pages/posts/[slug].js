@@ -21,12 +21,19 @@ import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 import styles from 'styles/pages/Post.module.scss';
 import styled from 'styled-components';
 
+import { CgCross } from 'react-icons/cg';
+
 const StyledHeader = styled(Header)({
-  display: 'flex',
+  textAlign: 'center',
 });
 
 const Sold = styled.h3({
+  marginTop: 0,
   color: 'red',
+});
+
+const Title = styled.h1({
+  margin: '0px 0px 1em 0px',
 });
 
 export default function Post({ post, socialImage, relatedPosts }) {
@@ -73,7 +80,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
       <StyledHeader>
-        {isSold.sold && <Sold>Såld</Sold>}
+        {isSold.sold ? <Sold>Såld</Sold> : <CgCross size={38} />}
         {featuredImage && (
           <FeaturedImage
             {...featuredImage}
@@ -81,7 +88,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
             dangerouslySetInnerHTML={featuredImage.caption}
           />
         )}
-        <h1
+        <Title
           className={styles.title}
           dangerouslySetInnerHTML={{
             __html: title,

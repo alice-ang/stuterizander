@@ -6,7 +6,7 @@ import Image from 'components/Image';
 const GridWrapper = styled.div({
   maxWidth: '100%',
   margin: '0 auto',
-  [Breakpoints.Large]: {
+  [Breakpoints.Medium]: {
     maxWidth: '50%',
   },
 });

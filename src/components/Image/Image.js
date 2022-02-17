@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Breakpoints } from 'styles';
 
 const ImageWrapper = styled.figure(({ isFeatured }) => ({
-  margin: 0,
+  margin: isFeatured ? 'auto' : 0,
   width: 'fit-content',
   height: 'fit-content',
   [Breakpoints.Medium]: {
@@ -24,10 +24,13 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
   },
   img: {
     width: '100%',
-    maxHeight: isFeatured ? 500 : undefined,
+    maxHeight: isFeatured ? 300 : undefined,
     height: '100%',
     objectFit: 'cover',
     objectPosition: '50% 50%',
+    [Breakpoints.Large]: {
+      maxHeight: isFeatured ? 500 : undefined,
+    },
   },
   figcaption: {
     color: 'grey',

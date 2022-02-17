@@ -20,9 +20,10 @@ const Featured = styled(Image)({
     border: 0,
     padding: 0,
     margin: 'auto',
-    maxHeight: 500,
-    [Breakpoints.Medium]: {
+    maxHeight: 300,
+    [Breakpoints.Large]: {
       objectFit: 'contain',
+      maxHeight: 500,
     },
   },
 });
