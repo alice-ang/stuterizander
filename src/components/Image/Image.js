@@ -28,7 +28,7 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
     height: '100%',
     objectFit: 'cover',
     objectPosition: '50% 50%',
-    [Breakpoints.Large]: {
+    [Breakpoints.Medium]: {
       maxHeight: isFeatured ? 500 : undefined,
     },
   },

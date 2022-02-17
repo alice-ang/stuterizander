@@ -33,7 +33,7 @@ const Sold = styled.h3({
 });
 
 const Title = styled.h1({
-  margin: '0px 0px 1em 0px',
+  margin: '0px 0px 0.3em 0px',
 });
 
 export default function Post({ post, socialImage, relatedPosts }) {
