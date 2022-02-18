@@ -32,12 +32,36 @@ const Sold = styled.h3({
   color: 'red',
 });
 
+const Deceased = styled.span({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '1.5rem',
+});
+
+const WpContent = styled.div({
+  // figure: {
+  //   margin: 'auto',
+  //   width: 'fit-content',
+  //   height: 'fit-content',
+  //   img: {
+  //     [Breakpoints.Medium]: {
+  //       maxWidth: '60%',
+  //     },
+  //     [Breakpoints.Large]: {
+  //       objectFit: 'contain',
+  //       maxHeight: 500,
+  //     },
+  //   },
+  // },
+});
+
 const Title = styled.h1({
   margin: '0px 0px 0.3em 0px',
 });
 
 export default function Post({ post, socialImage, relatedPosts }) {
-  const { title, metaTitle, description, content, modified, featuredImage, images, isSold } = post;
+  const { title, metaTitle, description, content, modified, featuredImage, images, currentStatus } = post;
   const [filteredImages, setFilteredImages] = useState(null);
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
@@ -80,7 +104,12 @@ export default function Post({ post, socialImage, relatedPosts }) {
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
       <StyledHeader>
-        {isSold.sold ? <Sold>Såld</Sold> : <CgCross size={38} />}
+        {currentStatus.sold && <Sold>Såld</Sold>}
+        {currentStatus.deceased && (
+          <Deceased>
+            <CgCross size={38} /> - {currentStatus.deceased.split('/')[2]}
+          </Deceased>
+        )}
         {featuredImage && (
           <FeaturedImage
             {...featuredImage}
@@ -99,7 +128,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
       <Content>
         <Section>
           <Container>
-            <div
+            <WpContent
               className={styles.content}
               dangerouslySetInnerHTML={{
                 __html: content,

@@ -18,7 +18,8 @@ export const QUERY_ALL_POSTS = gql`
             }
           }
           id
-          isSold {
+          currentStatus {
+            deceased
             sold
           }
           images {
@@ -82,7 +83,8 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       id
-      isSold {
+      currentStatus {
+        deceased
         sold
       }
       images {
@@ -146,7 +148,8 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             }
           }
           id
-          isSold {
+          currentStatus {
+            deceased
             sold
           }
           images {
@@ -199,7 +202,8 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     posts(where: { authorName: $slug, hasPassword: false }) {
       edges {
         node {
-          isSold {
+          currentStatus {
+            deceased
             sold
           }
           images {
