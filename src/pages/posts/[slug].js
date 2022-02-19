@@ -20,7 +20,7 @@ import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
 import styled from 'styled-components';
-
+import { Breakpoints } from 'styles';
 import { CgCross } from 'react-icons/cg';
 
 const StyledHeader = styled(Header)({
@@ -40,20 +40,18 @@ const Deceased = styled.span({
 });
 
 const WpContent = styled.div({
-  // figure: {
-  //   margin: 'auto',
-  //   width: 'fit-content',
-  //   height: 'fit-content',
-  //   img: {
-  //     [Breakpoints.Medium]: {
-  //       maxWidth: '60%',
-  //     },
-  //     [Breakpoints.Large]: {
-  //       objectFit: 'contain',
-  //       maxHeight: 500,
-  //     },
-  //   },
-  // },
+  figure: {
+    margin: 'auto',
+    width: 'fit-content',
+    height: 'fit-content',
+    img: {
+      width: 'fit-content',
+      height: 'fit-content',
+      [Breakpoints.Large]: {
+        objectFit: 'contain',
+      },
+    },
+  },
 });
 
 const Title = styled.h1({

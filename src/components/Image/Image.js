@@ -5,10 +5,6 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
   margin: isFeatured ? 'auto' : 0,
   width: 'fit-content',
   height: 'fit-content',
-  [Breakpoints.Medium]: {
-    width: isFeatured ? 'fit-content' : '100%',
-    height: isFeatured ? 'fit-content' : '100%',
-  },
   div: {
     overflow: 'hidden',
     margin: 0,
