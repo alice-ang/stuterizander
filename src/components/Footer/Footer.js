@@ -36,8 +36,6 @@ const FooterMenuColumns = styled.ul({
   justifyContent: 'space-around',
   flexWrap: 'wrap',
 
-  '& > li': {},
-
   [Breakpoints.Medium]: {
     '& > li': {
       maxWidth: '15em',
