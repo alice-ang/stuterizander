@@ -424,7 +424,7 @@ const Nav = () => {
       <NavWrapper>
         <NavSection>
           <Link href="/valkommen">
-            <a>{<Image src={'/logo.png'} layout="intrinsic" width="100%" height="50px" objectFit="contain" />}</a>
+            <a>{<Image src={'/logo.png'} layout="intrinsic" width="100%" height={70} objectFit="contain" />}</a>
           </Link>
           <MenuSectionDesktop>
             <Menu>
