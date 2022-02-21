@@ -7,7 +7,7 @@ import { GrPrevious as PreviousIcon, GrNext as NextIcon } from 'react-icons/gr';
 import { HiOutlineDotsHorizontal as Dots } from 'react-icons/hi';
 
 import styled from 'styled-components';
-import { Breakpoints } from 'styles';
+import { theme, Breakpoints } from 'styles';
 
 const NavWrapper = styled.nav({
   position: 'relative',
@@ -30,7 +30,7 @@ const NavWrapper = styled.nav({
     borderRadius: '0.4em',
     padding: '0.2em 0.8em',
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
       backgroundColor: 'grey',
     },
     svg: {

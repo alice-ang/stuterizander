@@ -22,6 +22,7 @@ const HeroImage = styled.img({
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
+  maxHeight: 500,
 });
 const Overlay = styled.div({
   position: 'absolute',

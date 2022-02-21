@@ -19,9 +19,47 @@ import FeaturedImage from 'components/FeaturedImage';
 import ImageGrid from 'components/ImageGrid.js/ImageGrid';
 
 import styles from 'styles/pages/Post.module.scss';
+import styled from 'styled-components';
+import { Breakpoints } from 'styles';
+import { CgCross } from 'react-icons/cg';
+
+const StyledHeader = styled(Header)({
+  textAlign: 'center',
+});
+
+const Sold = styled.h3({
+  marginTop: 0,
+  color: 'red',
+});
+
+const Deceased = styled.span({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '1.5rem',
+});
+
+const WpContent = styled.div({
+  figure: {
+    margin: 'auto',
+    width: 'fit-content',
+    height: 'fit-content',
+    img: {
+      width: 'fit-content',
+      height: 'fit-content',
+      [Breakpoints.Large]: {
+        objectFit: 'contain',
+      },
+    },
+  },
+});
+
+const Title = styled.h1({
+  margin: '0px 0px 0.3em 0px',
+});
 
 export default function Post({ post, socialImage, relatedPosts }) {
-  const { title, metaTitle, description, content, modified, featuredImage, images } = post;
+  const { title, metaTitle, description, content, modified, featuredImage, images, currentStatus } = post;
   const [filteredImages, setFilteredImages] = useState(null);
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
@@ -63,7 +101,13 @@ export default function Post({ post, socialImage, relatedPosts }) {
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
-      <Header>
+      <StyledHeader>
+        {currentStatus.sold && <Sold>Såld</Sold>}
+        {currentStatus.deceased && (
+          <Deceased>
+            <CgCross size={38} /> - {currentStatus.deceased.split('/')[2]}
+          </Deceased>
+        )}
         {featuredImage && (
           <FeaturedImage
             {...featuredImage}
@@ -71,18 +115,18 @@ export default function Post({ post, socialImage, relatedPosts }) {
             dangerouslySetInnerHTML={featuredImage.caption}
           />
         )}
-        <h1
+        <Title
           className={styles.title}
           dangerouslySetInnerHTML={{
             __html: title,
           }}
         />
-      </Header>
+      </StyledHeader>
 
       <Content>
         <Section>
           <Container>
-            <div
+            <WpContent
               className={styles.content}
               dangerouslySetInnerHTML={{
                 __html: content,

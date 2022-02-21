@@ -82,7 +82,7 @@ const FooterMenuItems = styled.ul({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
 });
@@ -133,7 +133,7 @@ const Contact = styled.div({
     color: theme.text.light,
     padding: '0px 1em',
     '&:hover': {
-      color: 'tomato',
+      color: theme.brand.link,
     },
   },
 });

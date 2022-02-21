@@ -12,7 +12,7 @@ export const theme = {
     complementary: '#460800',
     alternate: '#257a61',
     alternateComplementary: '#7A253E',
-    tomato: 'tomato',
+    link: '#169B62',
     light: '#fff',
     dark: '#383838',
   },

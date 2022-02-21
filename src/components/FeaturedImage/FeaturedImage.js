@@ -1,9 +1,9 @@
 import Image from 'components/Image';
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
 const Featured = styled(Image)({
   margin: '0 0 2em',
-
   div: {
     position: 'relative',
     width: '100%',
@@ -20,11 +20,16 @@ const Featured = styled(Image)({
     border: 0,
     padding: 0,
     margin: 'auto',
+    maxHeight: 300,
+    [Breakpoints.Large]: {
+      objectFit: 'contain',
+      maxHeight: 500,
+    },
   },
 });
 
-const FeaturedImage = ({ ...rest }) => {
-  return <Featured {...rest} />;
+const FeaturedImage = ({ className, ...rest }) => {
+  return <Featured className={className} {...rest} isFeatured />;
 };
 
 export default FeaturedImage;

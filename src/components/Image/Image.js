@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
-const ImageWrapper = styled.figure({
-  margin: 0,
-  width: '100%',
-  height: '100%',
+const ImageWrapper = styled.figure(({ isFeatured }) => ({
+  margin: isFeatured ? 'auto' : 0,
+  width: 'fit-content',
+  height: 'fit-content',
   div: {
     overflow: 'hidden',
     margin: 0,
@@ -19,9 +20,13 @@ const ImageWrapper = styled.figure({
   },
   img: {
     width: '100%',
+    maxHeight: isFeatured ? 300 : undefined,
     height: '100%',
     objectFit: 'cover',
     objectPosition: '50% 50%',
+    [Breakpoints.Medium]: {
+      maxHeight: isFeatured ? 500 : undefined,
+    },
   },
   figcaption: {
     color: 'grey',
@@ -29,11 +34,11 @@ const ImageWrapper = styled.figure({
     fontStyle: 'italic',
     marginTop: '1em',
   },
-});
+}));
 
-const Image = ({ children, src, alt, srcSet, dangerouslySetInnerHTML }) => {
+const Image = ({ children, src, alt, srcSet, dangerouslySetInnerHTML, isFeatured }) => {
   return (
-    <ImageWrapper>
+    <ImageWrapper isFeatured={isFeatured}>
       <div>
         <img src={src} alt={alt || ''} srcSet={srcSet} />
       </div>

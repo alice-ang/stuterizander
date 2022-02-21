@@ -1,17 +1,17 @@
 import Container from 'components/Container';
 
 import styled from 'styled-components';
+import { theme } from 'styles';
 
 const HeaderWrapper = styled.header({
   h1: {
-    margin: 0,
     lineHeight: 1.15,
     textAlign: 'center',
     a: {
       textDecoration: 'none',
 
       ['&:hover,&:focus,&:active']: {
-        color: 'tomato',
+        color: theme.brand.link,
         textDecoration: 'underline',
       },
     },
@@ -31,9 +31,9 @@ const HeaderWrapper = styled.header({
   },
 });
 
-const Header = ({ children }) => {
+const Header = ({ className, children }) => {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className={className}>
       <Container>{children}</Container>
     </HeaderWrapper>
   );
