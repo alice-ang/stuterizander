@@ -36,10 +36,7 @@ const FooterMenuColumns = styled.ul({
   justifyContent: 'space-around',
   flexWrap: 'wrap',
 
-  '& > li': {},
-
   [Breakpoints.Medium]: {
-    justifyContent: 'space-between',
     '& > li': {
       maxWidth: '15em',
     },
@@ -123,7 +120,6 @@ const Contact = styled.div({
   padding: '0px 1em 1em 1em',
   backgroundColor: theme.brand.alternate,
   color: theme.text.light,
-
   width: '100%',
   [Breakpoints.Medium]: {
     width: '50%',
