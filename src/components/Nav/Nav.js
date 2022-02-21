@@ -10,7 +10,7 @@ import { findMenuByLocation, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus'
 import { ImCross } from 'react-icons/im';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Section from 'components/Section';
-
+import Image from 'next/image';
 import NavListItem from 'components/NavListItem';
 import { Breakpoints, theme } from 'styles';
 
@@ -22,7 +22,7 @@ const NavWrapper = styled.nav({
 
 const NavSection = styled(Section)({
   display: 'flex',
-  alignItems: 'baseline',
+  alignItems: 'center',
   flexWrap: 'wrap',
   height: '100%',
   paddingTop: 0,
@@ -31,27 +31,9 @@ const NavSection = styled(Section)({
   justifyContent: 'space-between',
 });
 
-const Name = styled.p({
-  a: {
-    color: theme.text.light,
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    borderBottom: 'solid 2px transparent',
-    fontSize: '1.3em',
-    [Breakpoints.Small]: {
-      padding: '0.5em',
-      marginLeft: '-0.5em',
-    },
-    '&:hover': {
-      color: theme.brand.link,
-    },
-  },
-});
-
 const Search = styled.div({
   flexGrow: 0,
   display: 'none',
-
   button: {
     background: 'none',
     border: 'none',
@@ -275,8 +257,7 @@ const Nav = () => {
 
   const [searchVisibility, setSearchVisibility] = useState(SEARCH_HIDDEN);
   const [toggle, setToggle] = useState(false);
-  const { metadata = {}, menus } = useSite();
-  const { title } = metadata;
+  const { menus } = useSite();
 
   const navigation = findMenuByLocation(menus, [
     process.env.WORDPRESS_MENU_LOCATION_NAVIGATION,
@@ -442,11 +423,9 @@ const Nav = () => {
     <>
       <NavWrapper>
         <NavSection>
-          <Name>
-            <Link href="/valkommen">
-              <a>{title}</a>
-            </Link>
-          </Name>
+          <Link href="/valkommen">
+            <a>{<Image src={'/logo.png'} layout="intrinsic" width="100%" height={70} objectFit="contain" />}</a>
+          </Link>
           <MenuSectionDesktop>
             <Menu>
               {navigation?.map((listItem) => {
