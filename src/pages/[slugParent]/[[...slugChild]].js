@@ -53,12 +53,7 @@ export default function Page({ page, breadcrumbs }) {
 
       <Header>
         {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {featuredImage && (
-          <Hero image={featuredImage}>
-            <h2>{hero.heroText ?? title}</h2>
-            <h5>{hero.heroSubtitle ?? null}</h5>
-          </Hero>
-        )}
+        {featuredImage && <Hero image={featuredImage} title={hero.title} subtitle={hero.subtitle}></Hero>}
       </Header>
 
       <Content>

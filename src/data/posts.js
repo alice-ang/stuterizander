@@ -32,6 +32,12 @@ export const QUERY_ALL_POSTS = gql`
             image3 {
               sourceUrl
             }
+            image4 {
+              sourceUrl
+            }
+            image5 {
+              sourceUrl
+            }
           }
           categories {
             edges {
@@ -95,6 +101,12 @@ export const QUERY_POST_BY_SLUG = gql`
           sourceUrl
         }
         image3 {
+          sourceUrl
+        }
+        image4 {
+          sourceUrl
+        }
+        image5 {
           sourceUrl
         }
       }
@@ -162,6 +174,12 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             image3 {
               sourceUrl
             }
+            image4 {
+              sourceUrl
+            }
+            image5 {
+              sourceUrl
+            }
           }
           categories {
             edges {
@@ -214,6 +232,12 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
               sourceUrl
             }
             image3 {
+              sourceUrl
+            }
+            image4 {
+              sourceUrl
+            }
+            image5 {
               sourceUrl
             }
           }
