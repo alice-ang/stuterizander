@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
 const HeroContainer = styled.div({
   display: 'block',
   position: 'relative',
   textAlign: 'center',
+  [Breakpoints.Medium]: {
+    padding: 0,
+  },
 });
 
 const HeroText = styled.div({
@@ -37,12 +41,17 @@ const Overlay = styled.div({
   zIndex: 3,
 });
 
-const Hero = ({ image, children }) => {
+const Hero = ({ image, title, subtitle }) => {
   return (
     <HeroContainer>
       <HeroImage src={image.sourceUrl} alt={image.altText} srcSet={image.srcSet} width="100%" />
-      {children && <HeroText> {children}</HeroText>}
-      <Overlay />
+      {title && (
+        <HeroText>
+          <h2>{title}</h2>
+          <h5>{subtitle}</h5>
+        </HeroText>
+      )}
+      {title && <Overlay />}
     </HeroContainer>
   );
 };

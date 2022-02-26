@@ -6,7 +6,7 @@ import Image from 'components/Image';
 const GridWrapper = styled.div({
   maxWidth: '100%',
   [Breakpoints.Medium]: {
-    maxWidth: '60%',
+    maxWidth: '70%',
   },
 });
 
@@ -24,6 +24,7 @@ const ImageContainer = styled.div`
   grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
   grid-template-areas:
     '. . .'
+    '. . .'
     'main main main'
     'main main main'
     'main main main';
@@ -36,14 +37,6 @@ const ImageGrid = ({ images }) => {
   return (
     <GridWrapper>
       <ImageContainer>
-        <MainImage>
-          <Image
-            {...Object.values(images)[0]}
-            src={mainUrl}
-            dangerouslySetInnerHTML={Object.values(images)[0].caption}
-          />
-        </MainImage>
-
         {images &&
           Object.values(images).map((image) => {
             return (
@@ -57,6 +50,13 @@ const ImageGrid = ({ images }) => {
               </span>
             );
           })}
+        <MainImage>
+          <Image
+            {...Object.values(images)[0]}
+            src={mainUrl}
+            dangerouslySetInnerHTML={Object.values(images)[0].caption}
+          />
+        </MainImage>
       </ImageContainer>
     </GridWrapper>
   );

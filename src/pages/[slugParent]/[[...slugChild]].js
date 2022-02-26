@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
+import { getAllCategories, getCategoryBySlug } from 'lib/categories';
+import { getPostsByCategoryId } from 'lib/posts';
 import { getPageByUri, getAllPages, getBreadcrumbsByUri } from 'lib/pages';
 import { WebpageJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
@@ -15,10 +17,11 @@ import Container from 'components/Container';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Hero from 'components/Hero';
 import styles from 'styles/pages/Page.module.scss';
+import TemplatePosts from 'templates/posts';
+import Title from 'components/Title';
 
-export default function Page({ page, breadcrumbs }) {
+export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
-
   const { metadata: siteMetadata = {} } = useSite();
 
   const { metadata } = usePageMetadata({
@@ -53,12 +56,7 @@ export default function Page({ page, breadcrumbs }) {
 
       <Header>
         {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {featuredImage && (
-          <Hero image={featuredImage}>
-            <h2>{hero.heroText ?? title}</h2>
-            <h5>{hero.heroSubtitle ?? null}</h5>
-          </Hero>
-        )}
+        {featuredImage && <Hero image={featuredImage} title={hero.heroText} subtitle={hero.heroSubtitle}></Hero>}
       </Header>
 
       <Content>
@@ -96,12 +94,18 @@ export default function Page({ page, breadcrumbs }) {
           </Section>
         )}
       </Content>
+      {posts && posts.length > 0 && (
+        <Section>
+          <TemplatePosts title={title} Title={<Title title={title} />} posts={posts} slug={slug} metadata={metadata} />
+        </Section>
+      )}
     </Layout>
   );
 }
 
 export async function getStaticProps({ params = {} } = {}) {
   const { slugParent, slugChild } = params;
+  const { categories } = await getAllCategories();
 
   // We can use the URI to look up our page and subsequently its ID, so
   // we can first contruct our URI from the page params
@@ -117,18 +121,23 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const { page } = await getPageByUri(pageUri);
 
-  // In order to show the proper breadcrumbs, we need to find the entire
-  // tree of pages. Rather than querying every segment, the query should
-  // be cached for all pages, so we can grab that and use it to create
-  // our trail
+  const isMatching = categories.find((category) => category.slug == page.slug ?? null);
+
+  const getMatching = async (matching) => {
+    if (!matching) {
+      return null;
+    }
+    const { category } = await getCategoryBySlug(page.slug);
+    const { posts } = await getPostsByCategoryId(category.databaseId);
+    return posts;
+  };
 
   const { pages } = await getAllPages();
-
   const breadcrumbs = getBreadcrumbsByUri(pageUri, pages);
-
   return {
     props: {
       page,
+      posts: await getMatching(isMatching),
       breadcrumbs,
     },
   };

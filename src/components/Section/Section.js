@@ -3,7 +3,6 @@ import { Breakpoints } from 'styles';
 
 const SectionWrapper = styled.section({
   width: '100%',
-
   margin: 0,
   padding: 0,
   [Breakpoints.Medium]: {

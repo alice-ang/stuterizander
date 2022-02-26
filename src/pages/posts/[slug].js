@@ -61,7 +61,6 @@ const Title = styled.h1({
 export default function Post({ post, socialImage, relatedPosts }) {
   const { title, metaTitle, description, content, modified, featuredImage, images, currentStatus } = post;
   const [filteredImages, setFilteredImages] = useState(null);
-
   const { metadata: siteMetadata = {}, homepage } = useSite();
 
   if (!post.og) {
