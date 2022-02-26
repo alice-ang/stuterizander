@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
-import { getCategoryBySlug } from 'lib/categories';
+import { getAllCategories, getCategoryBySlug } from 'lib/categories';
 import { getPostsByCategoryId } from 'lib/posts';
 import { getPageByUri, getAllPages, getBreadcrumbsByUri } from 'lib/pages';
 import { WebpageJsonLd } from 'lib/json-ld';
@@ -22,7 +22,6 @@ import Title from 'components/Title';
 
 export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
-  console.log(hero);
   const { metadata: siteMetadata = {} } = useSite();
 
   const { metadata } = usePageMetadata({
@@ -95,7 +94,7 @@ export default function Page({ page, breadcrumbs, posts }) {
           </Section>
         )}
       </Content>
-      {posts.length > 0 && (
+      {posts && posts.length > 0 && (
         <Section>
           <TemplatePosts title={title} Title={<Title title={title} />} posts={posts} slug={slug} metadata={metadata} />
         </Section>
@@ -106,6 +105,7 @@ export default function Page({ page, breadcrumbs, posts }) {
 
 export async function getStaticProps({ params = {} } = {}) {
   const { slugParent, slugChild } = params;
+  const { categories } = await getAllCategories();
 
   // We can use the URI to look up our page and subsequently its ID, so
   // we can first contruct our URI from the page params
@@ -120,17 +120,24 @@ export async function getStaticProps({ params = {} } = {}) {
   }
 
   const { page } = await getPageByUri(pageUri);
-  const { category } = await getCategoryBySlug(page?.slug);
-  const { posts } = await getPostsByCategoryId(category.databaseId);
+
+  const isMatching = categories.find((category) => category.slug == page.slug ?? null);
+
+  const getMatching = async (matching) => {
+    if (!matching) {
+      return null;
+    }
+    const { category } = await getCategoryBySlug(page.slug);
+    const { posts } = await getPostsByCategoryId(category.databaseId);
+    return posts;
+  };
 
   const { pages } = await getAllPages();
-
   const breadcrumbs = getBreadcrumbsByUri(pageUri, pages);
-
   return {
     props: {
       page,
-      posts,
+      posts: await getMatching(isMatching),
       breadcrumbs,
     },
   };
