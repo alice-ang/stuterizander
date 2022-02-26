@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
+import { getCategoryBySlug } from 'lib/categories';
+import { getPostsByCategoryId } from 'lib/posts';
 import { getPageByUri, getAllPages, getBreadcrumbsByUri } from 'lib/pages';
 import { WebpageJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
@@ -15,8 +17,10 @@ import Container from 'components/Container';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Hero from 'components/Hero';
 import styles from 'styles/pages/Page.module.scss';
+import TemplatePosts from 'templates/posts';
+import Title from 'components/Title';
 
-export default function Page({ page, breadcrumbs }) {
+export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
 
   const { metadata: siteMetadata = {} } = useSite();
@@ -91,6 +95,11 @@ export default function Page({ page, breadcrumbs }) {
           </Section>
         )}
       </Content>
+      {posts.length > 0 && (
+        <Section>
+          <TemplatePosts title={title} Title={<Title title={title} />} posts={posts} slug={slug} metadata={metadata} />
+        </Section>
+      )}
     </Layout>
   );
 }
@@ -111,11 +120,8 @@ export async function getStaticProps({ params = {} } = {}) {
   }
 
   const { page } = await getPageByUri(pageUri);
-
-  // In order to show the proper breadcrumbs, we need to find the entire
-  // tree of pages. Rather than querying every segment, the query should
-  // be cached for all pages, so we can grab that and use it to create
-  // our trail
+  const { category } = await getCategoryBySlug(page?.slug);
+  const { posts } = await getPostsByCategoryId(category.databaseId);
 
   const { pages } = await getAllPages();
 
@@ -124,6 +130,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       page,
+      posts,
       breadcrumbs,
     },
   };
