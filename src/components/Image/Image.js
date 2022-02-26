@@ -3,12 +3,8 @@ import { Breakpoints } from 'styles';
 
 const ImageWrapper = styled.figure(({ isFeatured }) => ({
   margin: isFeatured ? 'auto' : 0,
-  width: 'fit-content',
+  width: isFeatured ? '100%' : 'fit-content',
   height: 'fit-content',
-  div: {
-    overflow: 'hidden',
-    margin: 0,
-  },
   p: {
     '&:first-child': {
       marginTop: 0,
@@ -19,10 +15,9 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
     },
   },
   img: {
-    width: '100%',
     maxHeight: isFeatured ? 300 : undefined,
     height: '100%',
-    objectFit: 'cover',
+    objectFit: isFeatured ? 'contain' : 'cover',
     objectPosition: '50% 50%',
     [Breakpoints.Medium]: {
       maxHeight: isFeatured ? 500 : undefined,
@@ -39,9 +34,8 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
 const Image = ({ children, src, alt, srcSet, dangerouslySetInnerHTML, isFeatured }) => {
   return (
     <ImageWrapper isFeatured={isFeatured}>
-      <div>
-        <img src={src} alt={alt || ''} srcSet={srcSet} />
-      </div>
+      <img src={src} alt={alt || ''} srcSet={srcSet} />
+
       {children && <figcaption>{children}</figcaption>}
       {dangerouslySetInnerHTML && (
         <figcaption

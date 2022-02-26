@@ -5,7 +5,6 @@ const HeroContainer = styled.div({
   display: 'block',
   position: 'relative',
   textAlign: 'center',
-  paddingBottom: '1em',
   [Breakpoints.Medium]: {
     padding: 0,
   },
@@ -48,8 +47,8 @@ const Hero = ({ image, title, subtitle }) => {
       <HeroImage src={image.sourceUrl} alt={image.altText} srcSet={image.srcSet} width="100%" />
       {title && (
         <HeroText>
-          <h2>{title ?? null}</h2>
-          <h5>{subtitle ?? null}</h5>
+          <h2>{title}</h2>
+          <h5>{subtitle}</h5>
         </HeroText>
       )}
       {title && <Overlay />}

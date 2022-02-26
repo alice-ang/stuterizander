@@ -22,7 +22,7 @@ import Title from 'components/Title';
 
 export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
-
+  console.log(hero);
   const { metadata: siteMetadata = {} } = useSite();
 
   const { metadata } = usePageMetadata({
@@ -57,7 +57,7 @@ export default function Page({ page, breadcrumbs, posts }) {
 
       <Header>
         {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {featuredImage && <Hero image={featuredImage} title={hero.title} subtitle={hero.subtitle}></Hero>}
+        {featuredImage && <Hero image={featuredImage} title={hero.heroText} subtitle={hero.heroSubtitle}></Hero>}
       </Header>
 
       <Content>
