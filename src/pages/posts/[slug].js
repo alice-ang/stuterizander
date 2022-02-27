@@ -16,7 +16,7 @@ import Section from 'components/Section';
 import Container from 'components/Container';
 import Content from 'components/Content';
 import FeaturedImage from 'components/FeaturedImage';
-import ImageGrid from 'components/ImageGrid.js/ImageGrid';
+import ImageSlider from 'components/ImageSlider/ImageSlider';
 
 import styles from 'styles/pages/Post.module.scss';
 import styled from 'styled-components';
@@ -134,7 +134,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
         {filteredImages && filteredImages.length > 0 && (
           <Section>
             <Container>
-              <ImageGrid images={filteredImages} />
+              <ImageSlider slides={filteredImages} />
             </Container>
           </Section>
         )}
