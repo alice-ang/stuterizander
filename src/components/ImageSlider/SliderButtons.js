@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-
+import { Breakpoints, theme } from 'styles';
 const Prev = styled.button({
   outline: 0,
   cursor: 'pointer',
@@ -17,6 +17,10 @@ const Prev = styled.button({
   fill: '#1bcacd',
   padding: 0,
   left: 0,
+  color: theme.brand.light,
+  [Breakpoints.Large]: {
+    color: theme.text.neutral,
+  },
 });
 
 const Next = styled.button({
@@ -34,6 +38,10 @@ const Next = styled.button({
   fill: '#1bcacd',
   padding: 0,
   right: 0,
+  color: theme.brand.light,
+  [Breakpoints.Large]: {
+    color: theme.text.neutral,
+  },
 });
 
 export const PrevButton = ({ enabled, onClick }) => (

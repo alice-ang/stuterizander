@@ -2,15 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from './SliderButtons';
 import styled from 'styled-components';
-import { Breakpoints, theme } from 'styles';
+import { Breakpoints } from 'styles';
 
 const Embla = styled.div({
   position: 'relative',
-  color: theme.brand.light,
   [Breakpoints.Large]: {
     maxWidth: '60%',
     margin: 'auto',
-    color: theme.brand.dark,
   },
 });
 
