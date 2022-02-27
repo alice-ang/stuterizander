@@ -43,6 +43,9 @@ const SlideInner = styled.div({
     position: 'absolute',
     padingTop: 15,
   },
+  [Breakpoints.Large]: {
+    height: 600,
+  },
 });
 
 const SlideImg = styled.img({
@@ -50,6 +53,8 @@ const SlideImg = styled.img({
   display: 'block',
   top: '50%',
   left: '50%',
+  height: 'auto',
+  objectFit: 'contain',
   transform: 'translate(-50%, -50%)',
 });
 
