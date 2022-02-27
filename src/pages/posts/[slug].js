@@ -132,11 +132,9 @@ export default function Post({ post, socialImage, relatedPosts }) {
           </Container>
         </Section>
         {filteredImages && filteredImages.length > 0 && (
-          <Section>
-            <Container>
-              <ImageSlider slides={filteredImages} />
-            </Container>
-          </Section>
+          <Container>
+            <ImageSlider slides={filteredImages} />
+          </Container>
         )}
       </Content>
 
