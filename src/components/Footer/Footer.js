@@ -232,7 +232,7 @@ const Footer = () => {
         </Contact>
         <MapSection>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d66320.28908214375!2d15.708124772762108!3d58.70466935565554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46594fe916eff067%3A0x62323bd3cc41fbb1!2sNice!5e0!3m2!1ssv!2sse!4v1643479008122!5m2!1ssv!2sse"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2074.8387085047643!2d15.854333316045535!3d58.66550938143151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465945eff6a53edf%3A0x810086026a55a23a!2s%C3%96ssby%20611%2C%20612%2092%20Finsp%C3%A5ng!5e0!3m2!1ssv!2sse!4v1645982605295!5m2!1ssv!2sse"
             loading="lazy"
           ></iframe>
         </MapSection>
