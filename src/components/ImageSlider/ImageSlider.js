@@ -24,6 +24,9 @@ const Container = styled.div({
   '-khtml-user-select': 'none',
   '-webkit-tap-highlight-color': 'transparent',
   marginLeft: -10,
+  figure: {
+    margin: 0,
+  },
 });
 
 const Slide = styled.div({
@@ -35,7 +38,7 @@ const Slide = styled.div({
 const SlideInner = styled.div({
   position: 'relative',
   overflow: 'hidden',
-  height: 'fit-content',
+  height: 400,
   figcaption: {
     position: 'absolute',
     padingTop: 15,
