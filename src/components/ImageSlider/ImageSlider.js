@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from './SliderButtons';
 import styled from 'styled-components';
+import { Breakpoints } from 'styles';
 
 const Embla = styled.div({
   position: 'relative',
-  backgroundColor: '#f7f7f7',
-  padding: 20,
-  maxWidth: 670,
-  marginLeft: 'auto',
-  marginRight: 'auto',
+  [Breakpoints.Large]: {
+    maxWidth: '60%',
+    margin: 'auto',
+  },
 });
 
 const Viewport = styled.div({
@@ -35,8 +35,7 @@ const Slide = styled.div({
 const SlideInner = styled.div({
   position: 'relative',
   overflow: 'hidden',
-  height: 399,
-
+  height: 'fit-content',
   figcaption: {
     position: 'absolute',
     padingTop: 15,
@@ -49,8 +48,6 @@ const SlideImg = styled.img({
   top: '50%',
   left: '50%',
   width: 'auto',
-  minHeight: '100%',
-  minWidth: '100%',
   maxWidth: 'none',
   transform: 'translate(-50%, -50%)',
 });

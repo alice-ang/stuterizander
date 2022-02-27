@@ -12,13 +12,10 @@ const Prev = styled.button({
   top: '50%',
   transform: 'translateY(-50%)',
   border: 0,
-  width: 30,
-  height: 30,
   justifyContent: 'center',
   alignItems: 'center',
   fill: '#1bcacd',
   padding: 0,
-
   left: 27,
 });
 
@@ -32,8 +29,6 @@ const Next = styled.button({
   top: '50%',
   transform: 'translateY(-50%)',
   border: 0,
-  width: 30,
-  height: 30,
   justifyContent: 'center',
   alignItems: 'center',
   fill: '#1bcacd',
