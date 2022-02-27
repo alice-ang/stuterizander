@@ -50,7 +50,6 @@ const SlideImg = styled.img({
   display: 'block',
   top: '50%',
   left: '50%',
-  height: 'auto',
   transform: 'translate(-50%, -50%)',
 });
 
