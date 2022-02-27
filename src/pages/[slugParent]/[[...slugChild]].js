@@ -21,6 +21,7 @@ import TemplatePosts from 'templates/posts';
 import Title from 'components/Title';
 
 export default function Page({ page, breadcrumbs, posts }) {
+  console.log(posts);
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
   const { metadata: siteMetadata = {} } = useSite();
   const sortedPosts = posts.sort((a, b) => b.modifiedTime - a.modifiedTime);
@@ -128,11 +129,10 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const { page } = await getPageByUri(pageUri);
 
-  const isMatching = categories.find((category) => category.slug == page.slug ?? null);
-
+  const isMatching = categories.filter((category) => category.slug == page.slug);
   const getMatching = async (matching) => {
-    if (!matching) {
-      return null;
+    if (!matching.length) {
+      return [];
     }
     const { category } = await getCategoryBySlug(page.slug);
     const { posts } = await getPostsByCategoryId(category.databaseId);
