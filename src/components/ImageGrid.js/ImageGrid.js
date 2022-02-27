@@ -42,6 +42,7 @@ const ImageContainer = styled.div({
 
 const ImageGrid = ({ images }) => {
   const [mainUrl, setMainUrl] = useState(images[0].sourceUrl);
+  const [mainCaption, setMainCaption] = useState(images[0].caption);
 
   return (
     <GridWrapper>
@@ -53,15 +54,16 @@ const ImageGrid = ({ images }) => {
                 key={image.sourceUrl}
                 onClick={() => {
                   setMainUrl(image.sourceUrl);
+                  setMainCaption(image.caption);
                 }}
               >
-                <Image {...image} src={image.sourceUrl} dangerouslySetInnerHTML={image.caption} alt="bildgalleri" />
+                <Image {...image} src={image.sourceUrl} alt="bildgalleri" />
               </span>
             );
           })}
       </ImageContainer>
       <MainImage>
-        <Image {...Object.values(images)[0]} src={mainUrl} dangerouslySetInnerHTML={Object.values(images)[0].caption} />
+        <Image {...Object.values(images)[0]} src={mainUrl} dangerouslySetInnerHTML={mainCaption} />
       </MainImage>
     </GridWrapper>
   );
