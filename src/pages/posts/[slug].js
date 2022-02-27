@@ -40,10 +40,8 @@ const Deceased = styled.span({
 });
 
 const WpContent = styled.div({
+  margin: 'auto',
   figure: {
-    margin: 'auto',
-    width: 'fit-content',
-    height: 'fit-content',
     img: {
       width: 'fit-content',
       height: 'fit-content',

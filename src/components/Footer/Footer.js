@@ -194,9 +194,9 @@ const Footer = () => {
                 <strong>Övrigt</strong>
               </FooterMenuPTitle>
               <FooterMenuItems>
-                <li>
+                {/* <li>
                   <a href="/feed.xml">RSS</a>
-                </li>
+                </li> */}
                 <li>
                   <a href="/sitemap.xml">Sitemap</a>
                 </li>

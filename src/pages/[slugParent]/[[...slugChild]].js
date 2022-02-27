@@ -23,6 +23,7 @@ import Title from 'components/Title';
 export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
   const { metadata: siteMetadata = {} } = useSite();
+  const sortedPosts = posts.sort((a, b) => b.modifiedTime - a.modifiedTime);
 
   const { metadata } = usePageMetadata({
     metadata: {
@@ -96,7 +97,13 @@ export default function Page({ page, breadcrumbs, posts }) {
       </Content>
       {posts && posts.length > 0 && (
         <Section>
-          <TemplatePosts title={title} Title={<Title title={title} />} posts={posts} slug={slug} metadata={metadata} />
+          <TemplatePosts
+            title={title}
+            Title={<Title title={title} />}
+            posts={sortedPosts}
+            slug={slug}
+            metadata={metadata}
+          />
         </Section>
       )}
     </Layout>

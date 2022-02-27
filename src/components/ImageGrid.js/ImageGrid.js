@@ -16,20 +16,29 @@ const MainImage = styled.div`
   align-self: baseline;
 `;
 
-const ImageContainer = styled.div`
-  display: grid;
-  align-items: end;
-  grid-gap: 0.3rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
-  grid-template-areas:
-    '. . .'
-    '. . .'
-    'main main main'
-    'main main main'
-    'main main main';
-  cursor: pointer;
-`;
+const ImageContainer = styled.div({
+  display: 'grid',
+  gridAutoRows: '200px 200px',
+  gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))`,
+  gridGap: '0.5em',
+  margin: 0,
+  borderRadius: 5,
+});
+
+// const ImageContainer = styled.div`
+//   display: grid;
+//   align-items: end;
+//   grid-gap: 0.3rem;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
+//   grid-template-areas:
+//     '. . .'
+//     '. . .'
+//     'main main main'
+//     'main main main'
+//     'main main main';
+//   cursor: pointer;
+// `;
 
 const ImageGrid = ({ images }) => {
   const [mainUrl, setMainUrl] = useState(images[0].sourceUrl);
@@ -50,14 +59,10 @@ const ImageGrid = ({ images }) => {
               </span>
             );
           })}
-        <MainImage>
-          <Image
-            {...Object.values(images)[0]}
-            src={mainUrl}
-            dangerouslySetInnerHTML={Object.values(images)[0].caption}
-          />
-        </MainImage>
       </ImageContainer>
+      <MainImage>
+        <Image {...Object.values(images)[0]} src={mainUrl} dangerouslySetInnerHTML={Object.values(images)[0].caption} />
+      </MainImage>
     </GridWrapper>
   );
 };
