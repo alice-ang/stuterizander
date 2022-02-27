@@ -16,7 +16,6 @@ const Prev = styled.button({
   alignItems: 'center',
   fill: '#1bcacd',
   padding: 0,
-  left: 27,
 });
 
 const Next = styled.button({
@@ -33,17 +32,16 @@ const Next = styled.button({
   alignItems: 'center',
   fill: '#1bcacd',
   padding: 0,
-  right: 27,
 });
 
 export const PrevButton = ({ enabled, onClick }) => (
   <Prev className="embla__button embla__button--prev" onClick={onClick} disabled={!enabled}>
-    <FaAngleLeft size={40} color="#fff" />
+    <FaAngleLeft size={40} />
   </Prev>
 );
 
 export const NextButton = ({ enabled, onClick }) => (
   <Next className="embla__button embla__button--next" onClick={onClick} disabled={!enabled}>
-    <FaAngleRight size={40} color="#fff" />
+    <FaAngleRight size={40} />
   </Next>
 );
