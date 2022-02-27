@@ -25,18 +25,23 @@ export const QUERY_ALL_POSTS = gql`
           images {
             image1 {
               sourceUrl
+              caption
             }
             image2 {
               sourceUrl
+              caption
             }
             image3 {
               sourceUrl
+              caption
             }
             image4 {
               sourceUrl
+              caption
             }
             image5 {
               sourceUrl
+              caption
             }
           }
           categories {
@@ -96,18 +101,23 @@ export const QUERY_POST_BY_SLUG = gql`
       images {
         image1 {
           sourceUrl
+          caption
         }
         image2 {
           sourceUrl
+          caption
         }
         image3 {
           sourceUrl
+          caption
         }
         image4 {
           sourceUrl
+          caption
         }
         image5 {
           sourceUrl
+          caption
         }
       }
       categories {
@@ -167,18 +177,23 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
           images {
             image1 {
               sourceUrl
+              caption
             }
             image2 {
               sourceUrl
+              caption
             }
             image3 {
               sourceUrl
+              caption
             }
             image4 {
               sourceUrl
+              caption
             }
             image5 {
               sourceUrl
+              caption
             }
           }
           categories {
@@ -227,18 +242,23 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
           images {
             image1 {
               sourceUrl
+              caption
             }
             image2 {
               sourceUrl
+              caption
             }
             image3 {
               sourceUrl
+              caption
             }
             image4 {
               sourceUrl
+              caption
             }
             image5 {
               sourceUrl
+              caption
             }
           }
           categories {

@@ -27,16 +27,15 @@ const ImageWrapper = styled.figure(({ isFeatured }) => ({
     color: 'grey',
     textAlign: 'center',
     fontStyle: 'italic',
-    marginTop: '1em',
   },
 }));
 
-const Image = ({ children, src, alt, srcSet, dangerouslySetInnerHTML, isFeatured }) => {
+const Image = ({ children, src, alt, caption, srcSet, dangerouslySetInnerHTML, isFeatured }) => {
   return (
     <ImageWrapper isFeatured={isFeatured}>
       <img src={src} alt={alt || ''} srcSet={srcSet} />
 
-      {children && <figcaption>{children}</figcaption>}
+      {children && <figcaption>{caption ?? children}</figcaption>}
       {dangerouslySetInnerHTML && (
         <figcaption
           dangerouslySetInnerHTML={{
