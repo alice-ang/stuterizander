@@ -33,7 +33,7 @@ const ImageContainer = styled.div`
 
 const ImageGrid = ({ images }) => {
   const [mainUrl, setMainUrl] = useState(images[0].sourceUrl);
-
+  console.log(images);
   return (
     <GridWrapper>
       <ImageContainer>
