@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { theme } from 'styles';
 
 const Prev = styled.button({
   outline: 0,
@@ -39,12 +38,12 @@ const Next = styled.button({
 
 export const PrevButton = ({ enabled, onClick }) => (
   <Prev className="embla__button embla__button--prev" onClick={onClick} disabled={!enabled}>
-    <FaAngleLeft size={40} color={theme.text.neutral} />
+    <FaAngleLeft size={40} color="currentColor" />
   </Prev>
 );
 
 export const NextButton = ({ enabled, onClick }) => (
   <Next className="embla__button embla__button--next" onClick={onClick} disabled={!enabled}>
-    <FaAngleRight size={40} color={theme.text.neutral} />
+    <FaAngleRight size={40} color="currentColor" />
   </Next>
 );
