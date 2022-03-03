@@ -21,7 +21,6 @@ import TemplatePosts from 'templates/posts';
 import Title from 'components/Title';
 
 export default function Page({ page, breadcrumbs, posts }) {
-  console.log(posts);
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
   const { metadata: siteMetadata = {} } = useSite();
   const sortedPosts = posts.sort((a, b) => b.modifiedTime - a.modifiedTime);

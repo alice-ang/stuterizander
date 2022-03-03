@@ -83,7 +83,6 @@ const ImageSlider = ({ slides }) => {
         <Container>
           {slides.map((slide, index) => (
             <Slide key={index}>
-              {console.log(slide)}
               <figure>
                 <SlideInner>
                   <SlideImg src={slide.sourceUrl} alt="bildgalleri" />
