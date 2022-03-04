@@ -35,7 +35,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta name="google-site-verification" content="5uOcPk9jE-7ASYFhcLAjEC0635UzOb-viRvGZ1swJ00" />
           <link
-            href="//db.onlinewebfonts.com/c/efbd8f0d869bf61fbe0f139a1602cda8?family=LucidaCalligraphyW01"
+            href="https://db.onlinewebfonts.com/c/efbd8f0d869bf61fbe0f139a1602cda8?family=LucidaCalligraphyW01"
             rel="stylesheet"
             type="text/css"
           />{' '}
