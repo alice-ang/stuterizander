@@ -38,7 +38,7 @@ export default class MyDocument extends Document {
             href="https://db.onlinewebfonts.com/c/efbd8f0d869bf61fbe0f139a1602cda8?family=LucidaCalligraphyW01"
             rel="stylesheet"
             type="text/css"
-          />{' '}
+          />
           {this.helmetHeadComponents}
         </Head>
         <body {...this.helmetBodyAttrComponents}>
