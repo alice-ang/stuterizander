@@ -62,7 +62,7 @@ export async function getPostBySlug(slug) {
       throw e;
     }
 
-    const { seo = {} } = seoData?.data?.post;
+    const { seo = {} } = seoData?.data?.post ?? null;
 
     post.metaTitle = seo.title;
     post.metaDescription = seo.metaDesc;
