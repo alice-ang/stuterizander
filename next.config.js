@@ -30,15 +30,6 @@ module.exports = withPlugins([[indexSearch], [feed], [sitemap], [socialImages]],
   images: {
     domains: ['localhost'],
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/valkommen',
-        permanent: true,
-      },
-    ];
-  },
 });
 
 /**
