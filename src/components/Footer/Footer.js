@@ -128,6 +128,7 @@ const MapSection = styled.div({
   width: '100%',
   minHeight: 200,
   backgroundSize: 'cover',
+  backgroundPosition: 'center',
   [Breakpoints.Medium]: {
     width: '50%',
   },
