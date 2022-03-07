@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import useSite from 'hooks/use-site';
@@ -102,18 +103,6 @@ const ContactSection = styled(Section)({
   justifyContent: 'flex-start',
 });
 
-const MapSection = styled.div({
-  width: '100%',
-  [Breakpoints.Medium]: {
-    width: '50%',
-  },
-  iframe: {
-    width: '100%',
-    height: '100%',
-    border: 0,
-  },
-});
-
 const Contact = styled.div({
   textAlign: 'center',
   height: 'fit-content',
@@ -134,10 +123,27 @@ const Contact = styled.div({
   },
 });
 
+const MapSection = styled.div({
+  background: 'url(/map.webp)',
+  width: '100%',
+  minHeight: 200,
+  backgroundSize: 'cover',
+  [Breakpoints.Medium]: {
+    width: '50%',
+  },
+  iframe: {
+    width: '100%',
+    height: '100%',
+    border: 0,
+    top: 0,
+    left: 0,
+  },
+});
+
 const Footer = () => {
   const { metadata = {}, recentPosts = [], categories = [] } = useSite();
   const { title } = metadata;
-
+  const [mapSrc, setMapSrc] = useState('');
   const hasRecentPosts = Array.isArray(recentPosts) && recentPosts.length > 0;
   const hasRecentCategories = Array.isArray(categories) && categories.length > 0;
   const hasMenu = hasRecentPosts || hasRecentCategories;
@@ -147,27 +153,6 @@ const Footer = () => {
       {hasMenu && (
         <FooterMenu>
           <FooterMenuColumns>
-            {/* {hasRecentPosts && (
-              <li>
-                <Link href="/posts/" passHref>
-                  <FooterMenuTitle>
-                    <strong>Senaste inlägg</strong>
-                  </FooterMenuTitle>
-                </Link>
-                <FooterMenuItems>
-                  {recentPosts.map((post) => {
-                    const { id, slug, title } = post;
-                    return (
-                      <li key={id}>
-                        <Link href={postPathBySlug(slug)} passHref>
-                          <a>{title}</a>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </FooterMenuItems>
-              </li>
-            )} */}
             {hasRecentCategories && (
               <li>
                 <Link href="/categories/" passHref>
@@ -230,11 +215,15 @@ const Footer = () => {
             </a>
           </div>
         </Contact>
-        <MapSection>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2074.8387085047643!2d15.854333316045535!3d58.66550938143151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465945eff6a53edf%3A0x810086026a55a23a!2s%C3%96ssby%20611%2C%20612%2092%20Finsp%C3%A5ng!5e0!3m2!1ssv!2sse!4v1645982605295!5m2!1ssv!2sse"
-            loading="lazy"
-          ></iframe>
+
+        <MapSection
+          onClick={() =>
+            setMapSrc(
+              'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2074.8387085047643!2d15.854333316045535!3d58.66550938143151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465945eff6a53edf%3A0x810086026a55a23a!2s%C3%96ssby%20611%2C%20612%2092%20Finsp%C3%A5ng!5e0!3m2!1ssv!2sse!4v1645982605295!5m2!1ssv!2sse'
+            )
+          }
+        >
+          {mapSrc && <iframe src={mapSrc} loading="lazy"></iframe>}
         </MapSection>
       </ContactSection>
       <Legal>
