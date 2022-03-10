@@ -58,7 +58,7 @@ export async function getSiteMetadata() {
       throw e;
     }
 
-    const { webmaster, social } = seoData?.data?.seo ?? null;
+    const { webmaster, social } = seoData?.data?.seo;
 
     if (social) {
       settings.social = {};
