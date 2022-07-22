@@ -23,8 +23,9 @@ import Title from 'components/Title';
 export default function Page({ page, breadcrumbs, posts }) {
   const { title, metaTitle, description, slug, content, featuredImage, children, hero } = page;
   const { metadata: siteMetadata = {} } = useSite();
-  const sortedPosts = posts.sort((a, b) => b.modifiedTime - a.modifiedTime);
+  const sortedPosts = posts.sort((a, b) => Date.parse(b) - Date.parse(a.modified));
 
+  console.log(sortedPosts);
   const { metadata } = usePageMetadata({
     metadata: {
       ...page,
@@ -71,10 +72,9 @@ export default function Page({ page, breadcrumbs, posts }) {
             />
           </Container>
         </Section>
-
-        {hasChildren && (
-          <Section className={styles.sectionChildren}>
-            <Container>
+        <Section className={styles.sectionChildren}>
+          <Container>
+            {hasChildren ? (
               <aside>
                 <p className={styles.childrenHeader}>
                   <strong>{title}</strong>
@@ -91,9 +91,11 @@ export default function Page({ page, breadcrumbs, posts }) {
                   })}
                 </ul>
               </aside>
-            </Container>
-          </Section>
-        )}
+            ) : (
+              <h4>Just nu har vi inga hästar till salu.</h4>
+            )}
+          </Container>
+        </Section>
       </Content>
       {posts && posts.length > 0 && (
         <Section>
