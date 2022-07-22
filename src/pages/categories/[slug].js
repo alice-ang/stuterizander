@@ -7,7 +7,7 @@ import Title from 'components/Title';
 
 export default function Category({ category, posts }) {
   const { name, description, slug } = category;
-  const sortedPosts = posts.sort((a, b) => b.modifiedTime - a.modifiedTime);
+  const sortedPosts = posts.sort((a, b) => Date.parse(b.modified) - Date.parse(a.modified));
 
   const { metadata } = usePageMetadata({
     metadata: {
